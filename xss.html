@@ -2,6 +2,7 @@
 <body>
 <script>
 document.write("Let's go!<br>");
+<a href="javascript:window.local_obj.showSource("titlehaha", "{'source':'javascript:document.write(1)'}")">try</a>
 if( window.ToutiaoJSBridge ) document.write("ReadyReady");
 window.ToutiaoJSBridge.invokeMethod(JSON.stringify({
     "__callback_id": "0",
