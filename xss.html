@@ -2,6 +2,7 @@
 <body>
 <script>
 document.write("Let's go!<br>");
+if( window.ToutiaoJSBridge ) document.write("ReadyReady");
 window.ToutiaoJSBridge.invokeMethod(JSON.stringify({
     "__callback_id": "0",
     "func": "openSchema",
