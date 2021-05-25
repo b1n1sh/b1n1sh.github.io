@@ -1,7 +1,7 @@
 <html>
 <body>
 <script>
-	var blob = new Blob(['<iframe onload=console.log(this.contentWindow.document.cookie) src=#></iframe>'], {type: "text/html"});
+	var blob = new Blob(['<iframe onload=console.log(document.location.origin) src=#></iframe>'], {type: "text/html"});
 	location.href=URL.createObjectURL(blob);
 </script>
 </body>
