@@ -1,13 +1,8 @@
 <html>
 <body>
-<iframe onload="hwJSNetwork.sendData('https://gmail.com', 'GET', '', '', 'nothing');" src="https://gmail.com"></iframe>
 <script>
-	var frame = document.querySelector('iframe');
-	var ret = frame.contentWindow || frame.contentDocument;
-	console.log(ret);
-	//var ret = hwJSNetwork.sendData('https://gmail.com', 'GET', '', '', 'nothing');
-//var blob = new Blob(['<iframe onload=alert(this.contentWindow.document.cookie) src=#></iframe>'], {type: "text/html"});
-//location.href=URL.createObjectURL(blob);
+	var blob = new Blob(['<iframe onload=console.log(this.contentWindow.document.cookie) src=#></iframe>'], {type: "text/html"});
+	location.href=URL.createObjectURL(blob);
 </script>
 </body>
 </html>
