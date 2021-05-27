@@ -1,6 +1,6 @@
 <body>
   <script>
-    function leak() { alert(document.documentElement); }
+    function leak() { alert(document.body.innerHTML); }
   </script>
   <a href="javascript:WeixinJSContext.allocEmpty()" onclick="leak()">CLICK</a>
 </body> 
