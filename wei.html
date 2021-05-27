@@ -1,0 +1,7 @@
+<body>
+  <script>
+    function leak() { alert(document.documentElement); }
+  </script>
+  <a href="javascript:WeixinJSContext.allocEmpty()" onclick="leak()">CLICK</a>
+</body> 
+    
