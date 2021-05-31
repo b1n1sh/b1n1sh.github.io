@@ -8,13 +8,14 @@
 		function mylog(string) {
 		  	var log = document.getElementById('log');
 		  	if (log) {
-		    		log.innerText += "keylogging:" + string += '\n';
+				str = 'keydown: '+string+'\n';
+		    		log.innerText += str;
 		  	}
-		  	console.log(string);
+		  	// console.log(string);
 		}
 
 		document.querySelector('input').addEventListener('input', (e) => { 			
-			console.log(e);			
+			// console.log(e);			
 			mylog(e.data); 
 		});
 </script>
