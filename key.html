@@ -3,21 +3,25 @@
 	<h1>likely-looks naver.com!</h1>
 	<pre id='log'></pre>
  	* ID : <input type="text"></input>
-	* PWD : <input type="password"></input>
+	* PWD : <input type="password" id="pwd"></input>
 	<script>
 		function mylog(string) {
 		  	var log = document.getElementById('log');
-		  	if (log) {
-				str = 'keydown: '+string+'\n';
-		    		log.innerText += str;
+		  	if (log) {				
+		    		log.innerText += string+'\n';
 		  	}
 		  	// console.log(string);
 		}
 
 		document.querySelector('input').addEventListener('input', (e) => { 			
 			// console.log(e);			
-			mylog(e.data); 
+			mylog("userid: "+e.data); 
 		});
+		
+		document.getElementById('pwd').addEventListener('input, (e) => {
+			mylog("pwd: "+e.data); 
+		});							
+					
 </script>
 </body>
 </html>
