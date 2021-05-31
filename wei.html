@@ -24,10 +24,13 @@
 
   		var a = window.__wx._getAllHosts("google.com, alert(1)");
   		mylog(a);  	
-  		a = window.__wx._getDgtVerifyRandomStr();
-  		mylog(a);
-  		a = window.__wx._getHtmlContent("https://www.google.com");
-  		mylog(a);
+  		var c = window.__wx._getDgtVerifyRandomStr();
+  		mylog(c);
+  		var b = window.__wx._getHtmlContent();
+  		mylog(b);
+  		var d = window.__wx._sendMessage("<script>alert(1);</script>");
+  		mylog(d);
   	});
   </script>
 </body> 
+
