@@ -11,12 +11,12 @@ function mylog(string) {
   console.log(string);
 }
   
-  document.onkeypress = function(e) {
-	get = window.event?event:e;
-	key = get.keyCode?get.keyCode:get.charCode;
-	key = String.fromCharCode(key);
-	 mylog(key);	
-   }	
+	window.addEventListener('keydown', (e) => {
+		console.log(e);
+		key = `${e.code}`;
+		// key=String.fromCharCode(key);
+		mylog(key);
+	});
 </script>
 </body>
 </html>
