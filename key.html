@@ -12,9 +12,8 @@
 		}
 
 		document.querySelector('input').addEventListener('input', (e) => { 			
-			console.log(e);
-			key = `${e.code}`;
-			mylog(key); 
+			console.log(e);			
+			mylog(e.target.value); 
 		});
 </script>
 </body>
