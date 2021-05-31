@@ -1,4 +1,13 @@
 <body>
+	<pre id='log'></pre>
+	<script>
+		function mylog(string) {
+		  	var log = document.getElementById('log');
+		  	if (log) {				
+		    		log.innerText += string+'\n';
+		  	}
+		}
+	</script>
   <script>
     function leak() { alert(document.body.innerHTML); }
     
@@ -17,6 +26,11 @@
   <a href="javascript:WeixinJSBridge.call('alert(1)', {}, 'function x() { alert(2); }')">call TEST</a>
 
   <script>
-  	window.__wx._getAllHosts("google.com, alert(1)");
+  	var a = window.__wx._getAllHosts("google.com, alert(1)");
+  	mylog(a);  	
+  	a = window.__wx._getDgtVerifyRandomStr();
+  	mylog(a);
+  	a = window.__wx._getHtmlContent("https://www.google.com");
+  	mylog(a);
   </script>
 </body> 
