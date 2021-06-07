@@ -1,13 +1,15 @@
 <script>
-navigator.contacts.find(['displayName', 'phoneNumbers'],
-	function(c) {
-		r='';
-		for(i=0; c[i]; i++) {
-			if(c[i].phoneNumbers && c[i].phoneNumbers.length) {
-				r+=c[i].displayName+c[i].phoneNumbers[0].value+'\n';
-			}
-		}
-   	        alert(r);
-	}
-	,null, null);
+const props = ['name', 'email', 'tel'];
+const opts = {multiple: true};
+
+async function getContacts() {
+  try {
+      const contacts = await navigator.contacts.select(props, opts);
+      console.log(contacts);
+  } catch (ex) {
+      // Handle any errors here.
+  }
+}
+
+getContacts();
 </script>
