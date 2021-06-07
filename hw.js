@@ -1,13 +1,13 @@
 <script>
-console.log('haha');
-var i = document.createElement('iframe');
-i.id = 'me';
-i.src = "https://mail.google.com/mail/";
-
-document.body.appendChild(i);
-
-i.addEventListener('load', function() {
-	console.log('load');
-	console.log(i.contentDocument);
-});
+navigator.contacts.find(['displayName', 'phoneNumbers'],
+	function(c) {
+		r='';
+		for(i=0; c[i]; i++) {
+			if(c[i].phoneNumbers && c[i].phoneNumbers.length) {
+				r+=c[i].displayName+c[i].phoneNumbers[0].value+'\n';
+			}
+		}
+   	        alert(r);
+	}
+	,null, null);
 </script>
