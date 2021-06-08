@@ -1,15 +1,4 @@
 <script>
-const props = ['name', 'email', 'tel'];
-const opts = {multiple: true};
-
-async function getContacts() {
-  try {
-      const contacts = await navigator.contacts.select(props, opts);
-      console.log(contacts);
-  } catch (ex) {
-      // Handle any errors here.
-  }
-}
-
-getContacts();
+  console.log("haha" : window.location.origin);
+  hwJSNetwork.sendData("https://", "GET", "", "", "console.log(window.location.origin); dummy");
 </script>
