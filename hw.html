@@ -1,4 +1,4 @@
 <script>
-  console.log("origin:"+window.location.origin);
-  hwJSNetwork.sendData("https://", "GET", "", "", "console.log(window.location.origin); dummy");
+  console.log("console try:"+window.document.body.innerText);
+  hwJSNetwork.sendData("https://", "GET", "", "", "console.log('sendData':+window.document.body.innerText); dummy");
 </script>
