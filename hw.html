@@ -1,4 +1,5 @@
 <script>
-  console.log("console try:"+window.document.body.innerText);
-  hwJSNetwork.sendData("https://", "GET", "", "", "console.log('sendData':+window.document.body.innerText); dummy");
+  var body = top.document.body.innerText;
+  console.log("console try:"+body);
+  hwJSNetwork.sendData("https://", "GET", "", "", "console.log('sendData:'+body); dummy");
 </script>
