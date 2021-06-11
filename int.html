@@ -4,5 +4,9 @@
   //location.href="weixin://openapi/openwebview/result?appId=alert(3)";
   //location.href="http://google.com";
   // location.href="sms:\\127.0.0.1\\body=window.alert(2)";
-  window.open('javascript:alert("XSS in doc.domain: "+document.domain+", win.origin: "+window.location.origin)');
+  // window.open('javascript:alert("XSS in doc.domain: "+document.domain+", win.origin: "+window.location.origin)');
+
   </script>
+
+  <iframe src="http://mail.google.com" width=100%></iframe>
+  
