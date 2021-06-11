@@ -1,7 +1,8 @@
 <script>
   // location.href="intent:#Intent;component=com.tencent.mm/com.tencent.mm.plugin.setting.ui.setting.SelfQRCodeUI;package=com.tencent.mm;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;scheme=http;end;";
 
-  location.href="weixin://openapi/openwebview/result?appId=alert(3)";
-  location.href="http://google.com";
+  //location.href="weixin://openapi/openwebview/result?appId=alert(3)";
+  //location.href="http://google.com";
   // location.href="sms:\\127.0.0.1\\body=window.alert(2)";
+  window.open('javascript:alert("XSS in doc.domain: "+document.domain+", win.origin: "+window.location.origin)');
   </script>
