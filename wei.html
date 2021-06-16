@@ -17,7 +17,7 @@
     	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
 		if(typeof window.__wx !== 'undefined') {
 			mylog('__wx');
-			window.__wx._sendMessage(JSON.stringify({
+			window.__wx._sendMessage({
 				"func": "openWeAppPage",
 				"params": {
 					"scene":73,
@@ -39,7 +39,7 @@
 				},
 				"__msg_type":"call",
 				"__callback_id":"1026"	
-			}));
+			});
 		}
     	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
   	});
