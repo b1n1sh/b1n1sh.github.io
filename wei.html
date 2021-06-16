@@ -1,6 +1,6 @@
 <html>
 <body>
-	<pre id='log'></pre>
+	<pre id='log'></pre>	
 	<script>
 		function mylog(string) {
 		  	var log = document.getElementById('log');
@@ -17,7 +17,7 @@
     	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
 		if(typeof window.__wx !== 'undefined') {
 			mylog('__wx');
-			window.__wx._sendMessage({
+			var msg = JSON.stringify({
 				"func": "openWeAppPage",
 				"params": {
 					"scene":73,
@@ -40,6 +40,11 @@
 				"__msg_type":"call",
 				"__callback_id":"1026"	
 			});
+			
+			var msgArray = []; msgArray.push(msg);
+    		var msgArrayString = JSON.stringify(msgArray);
+
+			window.__wx._sendMessage(msgArrayString);
 		}
     	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
   	});
