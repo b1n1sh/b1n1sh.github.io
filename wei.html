@@ -1,7 +1,6 @@
 <html>
 <body>
 	<pre id='log'></pre>
-	<comment><script src="./wxjs.js"></script></comment>
 	<script>
 		function mylog(string) {
 		  	var log = document.getElementById('log');
@@ -16,32 +15,33 @@
   		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
     	if(typeof window.WeixinJSContext !== 'undefined') mylog('WeixinJSContext');
     	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
-		if(typeof window.__wx !== 'undefined') mylog('__wx');
+		if(typeof window.__wx !== 'undefined') {
+			mylog('__wx');
+			window.__wx._sendMessage(JSON.stringify({
+				"func": "openWeAppPage",
+				"params": {
+					"scene":73,
+					"sessionId":"6998359142851435608",
+					"userName":"gh_ed9c404e9686@app",
+					"relativeURL":"",
+					"docId":"",
+					"subScene":"",
+					"cookie":"",
+					"debugMode":0,
+					"appVersion":"65",
+					"appID":"wxd250b48686d39ba3",
+					"btn":"여는 중",
+					"desc":"n3PWJUApljTZa0J",
+					"jumpType":2,
+					"nickName":"全民狙神",
+					"tip":"全民狙神 미니 프로그램의 콘텐츠",
+					"weappUrl":""
+				},
+				"__msg_type":"call",
+				"__callback_id":"1026"	
+			}));
+		}
     	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
-
-		window.__wx._sendMessage(JSON.stringify({
-			"func": "openWeAppPage",
-			"params": {
-				"scene":73,
-				"sessionId":"6998359142851435608",
-				"userName":"gh_ed9c404e9686@app",
-				"relativeURL":"",
-				"docId":"",
-				"subScene":"",
-				"cookie":"",
-				"debugMode":0,
-				"appVersion":"65",
-				"appID":"wxd250b48686d39ba3",
-				"btn":"여는 중",
-				"desc":"n3PWJUApljTZa0J",
-				"jumpType":2,
-				"nickName":"全民狙神",
-				"tip":"全民狙神 미니 프로그램의 콘텐츠",
-				"weappUrl":""
-			},
-			"__msg_type":"call",
-			"__callback_id":"1026"	
-		}));
   	});
   </script>
 </body>
