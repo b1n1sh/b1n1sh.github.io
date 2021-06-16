@@ -16,11 +16,11 @@
 
   <script>
   	window.addEventListener('load', function(event) {
-  		if(typeof window.WeixinJSBridge === 'undefined') mylog('WeixinJSBridge undefined');
-    	if(typeof window.WeixinJSContext === 'undefined') mylog('WeixinJSContext undefined');
-    	if(typeof window.xwebToNative === 'undefined') mylog('xwebToNative undefined');
-		if(typeof window.__wx === 'undefined') mylog('__wx undefined');
-    	if(typeof window.__wxtag === 'undefined') mylog('__wxtag undefined');
+  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge undefined');
+    	if(typeof window.WeixinJSContext !== 'undefined') mylog('WeixinJSContext undefined');
+    	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative\n');
+		if(typeof window.__wx !== 'undefined') mylog('__wx!\n');
+    	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag\n');
 
   		var a = window.__wx._getAllHosts("google.com, alert(1)");
   		mylog(a);  	
