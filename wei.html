@@ -11,6 +11,7 @@
 	</script>
 
 	<script>
+		/*
 		window.WeixinJSBridge = { 
 			_handleMessageFromWeixin:function(msg) {
 				mylog("Hook _handleMessageFromWeixin");
@@ -18,12 +19,13 @@
 				mylog(msg_str);				
 			}
 		}
+		*/
 	</script>
 
 	<script>
 		function test() {
 			mylog("test");
-			
+
 			var msg = JSON.stringify({
 				"__msg_type":"event",
 				"__event_id":"onSearchDataReady",
@@ -35,9 +37,7 @@
 			});
 
 			window.WeixinJSBridge._handleMessageFromWeixin(msg);
-		};
-
-		test();
+		};		
 	</script>
 
 	<script>
@@ -82,6 +82,8 @@
 
 			window.__wx._sendMessage(msgArrayString);
 		}
+
+		test();
     	
     	/*
     	[+] WebView evaluateJavascript name:  javascript:WeixinJSBridge._handleMessageFromWeixin()
