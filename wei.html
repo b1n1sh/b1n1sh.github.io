@@ -21,6 +21,22 @@
 	</script>
 
 	<script>
+		function test() {
+			var msg = JSON.stringify({
+				"__msg_type":"event",
+				"__event_id":"onSearchDataReady",
+				"__params": {
+					"requestId":"1624260100272",
+					"json":"{\"SearchID\":\"8369370152922436064\",\"enterJumpInfo\":{\"appID\":\"wxd250b48686d39ba3\",\"appVersion\":\"65\",\"btn\":\"여는 중\",\"debugMode\":0,\"desc\":\"n3PWJUApljTZa0J\",\"jumpType\":2,\"nickName\":\"全民狙神\",\"tip\":\"\\\"全民狙神\\\" 미니 프로그램의 콘텐츠\",\"userName\":\"gh_ed9c404e9686@app\",\"weappUrl\":\"\"},\"query\":\"#小程序:\/\/全民狙神\/n3PWJUApljTZa0J\",\"ret\":0}",
+					"newQuery":true
+				}
+			})
+		};
+
+		test();
+	</script>
+
+	<script>
   	window.addEventListener('load', function(event) {
   		mylog("[+] Printing Javascript-bridges available");
   		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
@@ -64,7 +80,7 @@
 		}
     	
     	/*
-    	[+] WebView evaluateJavascript name:  javascript:WeixinJSBridge._handleMessageFromWeixin({"__msg_type":"event","__event_id":"onSearchDataReady","__params":{"requestId":"1624260100272","json":"{\"SearchID\":\"8369370152922436064\",\"enterJumpInfo\":{\"appID\":\"wxd250b48686d39ba3\",\"appVersion\":\"65\",\"btn\":\"여는 중\",\"debugMode\":0,\"desc\":\"n3PWJUApljTZa0J\",\"jumpType\":2,\"nickName\":\"全民狙神\",\"tip\":\"\\\"全民狙神\\\" 미니 프로그램의 콘텐츠\",\"userName\":\"gh_ed9c404e9686@app\",\"weappUrl\":\"\"},\"query\":\"#小程序:\/\/全民狙神\/n3PWJUApljTZa0J\",\"ret\":0}\n","newQuery":true}})
+    	[+] WebView evaluateJavascript name:  javascript:WeixinJSBridge._handleMessageFromWeixin()
 		*/
   	});
   </script>
