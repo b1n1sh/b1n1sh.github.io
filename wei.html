@@ -13,8 +13,10 @@
 	<script>
 		window.WeixinJSBridge = { 
 			_handleMessageFromWeixin:function(msg) {
+				mylog("Hook _handleMessageFromWeixin()");
 				var msg_str = JSON.stringify(msg);
 				mylog(msg_str);
+				window.WeixinJSBridge._handleMessageFromWeixin(msg);
 			}
 		}
 	</script>
