@@ -19,14 +19,20 @@
 	</script>
 
 	<script>
-  	window.addEventListener('load', function(event) {
+  	window.addEventListener('load', function(event) {  		
   		mylog("[+] Printing Javascript-bridges available");
   		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
     	if(typeof window.WeixinJSContext !== 'undefined') mylog('WeixinJSContext');
     	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
+    	if(typeof window.webSearchJSApi !== 'undefined') mylog('webSearchJSApi');
+    	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
+    	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('CustomFullscreenApi');
+    	if(typeof window.__wx !== 'undefined') mylog('__wx');
 		if(typeof window.__wx !== 'undefined') {
 			mylog('__wx');
 
+			mylog('setSearchInputWord test');
+			
 			var msg2 = JSON.stringify({
 				"func": "setSearchInputWord",
 				"params": {
@@ -68,8 +74,7 @@
     		var msgArrayString = JSON.stringify(msgArray);
 
 			window.__wx._sendMessage(msgArrayString);
-		}
-    	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
+		}    	
   	});
   </script>
 </body>
