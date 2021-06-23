@@ -26,6 +26,20 @@
     	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
 		if(typeof window.__wx !== 'undefined') {
 			mylog('__wx');
+
+			var msg2 = JSON.stringify({
+				"func": "setSearchInputWord",
+				"params": {
+					"word:":"#小程序://全民狙神/n3PWJUApljTZa0J",
+					"docPos" : 0,
+					"isInputChange" : false,
+					"tagList" : [],
+					"custom" : "",
+				},
+				"__msg_type" : "call",
+				"__callback_id" : "1013"
+			});
+
 			var msg = JSON.stringify({
 				"func": "openWeAppPage",
 				"params": {
@@ -50,7 +64,7 @@
 				"__callback_id":"1026"	
 			});
 
-			var msgArray = []; msgArray.push(msg);
+			var msgArray = []; msgArray.push(msg2);
     		var msgArrayString = JSON.stringify(msgArray);
 
 			window.__wx._sendMessage(msgArrayString);
