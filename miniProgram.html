@@ -32,8 +32,53 @@
 			mylog('__wx');
 
 			mylog('setSearchInputWord test');
-			
-			var msg2 = JSON.stringify({
+
+			var msg_array = new Array();
+
+			msg_array[0] = JSON.stringify({
+				"func":"getSearchData",
+				"params":{
+					"searchId":"",
+					"parentSearchID":"",
+					"parentType":0,
+					"query":"#小程序://全民狙神/n3PWJUApljTZa0J",
+					"scene":73,
+					"sessionId":"12562225195775423775",
+					"subSessionId":"73_3186109879_1624419664861",
+					"type":0,
+					"subType":0,
+					"wechatVersion":671089471,
+					"version":80008446,
+					"isHomePage":1,
+					"returnQuery":"",
+					"offset":0,
+					"tagInfo":{},
+					"sceneActionType":1,
+					"matchUser":{},
+					"numConditions":[],
+					"extReqParams":[{"key":"netType","textValue":"wifi"},{"key":"currentPage","uintValue":1},{"key":"requestId","textValue":"1624419664861"},{"key":"widgetVersion","uintValue":1017008}],
+					"requestId":"1624419664861",
+					"fromTagSearch":"1",
+					"extClientParams":"{"SnsContentType":"0","ShareSceneId":"wxid_c0ii6zc5886w22"}",
+					"page":"result",
+					"sugId":"",
+					"specialSearch":null
+				},
+				"__msg_type":"call",
+				"__callback_id":"1003"
+			});
+
+			msg_array[1] = JSON.stringify({
+				"func":"viewTypeChange",
+				"params":{
+					"view":"result",
+					"scene":73
+				},
+				"__msg_type":"call",
+				"__callback_id":"1011"
+			});
+
+			msg_array[2] = JSON.stringify({
 				"func": "setSearchInputWord",
 				"params": {
 					"word:":"#小程序://全民狙神/n3PWJUApljTZa0J",
@@ -46,7 +91,16 @@
 				"__callback_id" : "1013"
 			});
 
-			var msg = JSON.stringify({
+			msg_array[3] = JSON.stringify({
+				"func":"setFontSizeCallback",
+				"params":{
+					"fontSize":"2"
+				},
+				"__msg_type":"call",
+				"__callback_id":"1015"
+			});
+
+			msg_array[4] = JSON.stringify({
 				"func": "openWeAppPage",
 				"params": {
 					"scene":73,
@@ -70,10 +124,12 @@
 				"__callback_id":"1026"	
 			});
 
-			var msgArray = []; msgArray.push(msg2);
-    		var msgArrayString = JSON.stringify(msgArray);
-
-			window.__wx._sendMessage(msgArrayString);
+			for(var i=0; i<msg_array.length; i++) {
+				mylog('try' + i);
+				var msgArray = []; msgArray.push(msg_array[i]);
+				var msgArrayString = JSON.stringify(msgArray);
+				window.__wx._sendMessage(msgArrayString);
+			}			
 		}    	
   	});
   </script>
