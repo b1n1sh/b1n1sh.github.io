@@ -18,6 +18,15 @@
 </head>
 
 <body id="body" ontouchstart="">
+    <pre id='log'></pre>    
+    <script>
+        function mylog(string) {
+            var log = document.getElementById('log');
+            if (log) {              
+                    log.innerText += string+'\n';
+            }
+        }
+    </script>    
     <canvas id="canvas" style="display:none;"></canvas>
     <div id="app" class="app" :class="[view,platform,isIOS8]" ontouchstart="">
         <!-- 加载中 -->
