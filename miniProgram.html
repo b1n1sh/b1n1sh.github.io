@@ -1,9 +1,8 @@
 <html>
 <body>
-	<!--
-	<iframe src="./template/app.html?isHomePage=1&netType=wifi&query=#小程序://全民狙神/n3PWJUApljTZa0J&isOpenPreload=1&pRequestId=1624416301494&sessionId=11188811355750867065&fontRatio=1.0&parentSearchID=&type=0&subSessionId=73_3186109879_1624416301494&version=80008446&platform=android&scene=73&msgSvrId=5831590946835401850&lang=ko&fromTagSearch=1&wechatVersion=671089471"></iframe> -->
+	<a href="./template/app.html?isHomePage=1&netType=wifi&query=#小程序://全民狙神/n3PWJUApljTZa0J&isOpenPreload=1&pRequestId=1624416301494&sessionId=11188811355750867065&fontRatio=1.0&parentSearchID=&type=0&subSessionId=73_3186109879_1624416301494&version=80008446&platform=android&scene=73&msgSvrId=5831590946835401850&lang=ko&fromTagSearch=1&wechatVersion=671089471" id="click">click</a>
 
-	<a href="小程序://全民狙神/n3PWJUApljTZa0J" target="_blank">mini</a>
+	<a href="#小程序://全民狙神/n3PWJUApljTZa0J" target="_blink">mini</a>
 
 	<pre id='log'></pre>	
 	<script>
@@ -23,19 +22,6 @@
 		//}
 	</script>
 	<script>
-	var msg_array = new Array();
-
-	function wxComm() {
-		for(var i=0; i<msg_array.length; i++) {
-			mylog('try' + i);
-			var msgArray = []; msgArray.push(msg_array[i]);
-			var msgArrayString = JSON.stringify(msgArray);
-			window.__wx._sendMessage(msgArrayString);
-		}
-	}
-
-	setTimeout(wxComm, 3000);
-
   	window.addEventListener('load', function(event) {  		
   		mylog("[+] Printing Javascript-bridges available");
   		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
@@ -46,7 +32,12 @@
     	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('CustomFullscreenApi');
     	if(typeof window.__wx !== 'undefined') mylog('__wx');
 		if(typeof window.__wx !== 'undefined') {
+			mylog('__wx');
+
 			mylog('setSearchInputWord test');
+
+			var msg_array = new Array();
+
 			msg_array[0] = JSON.stringify({
 				"func":"getSearchData",
 				"params":{
@@ -135,6 +126,13 @@
 				"__msg_type":"call",
 				"__callback_id":"1026"	
 			});
+
+			for(var i=0; i<msg_array.length; i++) {
+				mylog('try' + i);
+				var msgArray = []; msgArray.push(msg_array[i]);
+				var msgArrayString = JSON.stringify(msgArray);
+				window.__wx._sendMessage(msgArrayString);
+			}			
 		}    	
   	});
   </script>
