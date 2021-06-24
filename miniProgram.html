@@ -22,6 +22,19 @@
 		//}
 	</script>
 	<script>
+	var msg_array = new Array();
+
+	function wxComm() {
+		for(var i=0; i<msg_array.length; i++) {
+			mylog('try' + i);
+			var msgArray = []; msgArray.push(msg_array[i]);
+			var msgArrayString = JSON.stringify(msgArray);
+			window.__wx._sendMessage(msgArrayString);
+		}
+	}
+
+	setTimeout(wxComm, 3000);
+
   	window.addEventListener('load', function(event) {  		
   		mylog("[+] Printing Javascript-bridges available");
   		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
@@ -34,9 +47,7 @@
 		if(typeof window.__wx !== 'undefined') {
 			mylog('__wx');
 
-			mylog('setSearchInputWord test');
-
-			var msg_array = new Array();
+			mylog('setSearchInputWord test');			
 
 			msg_array[0] = JSON.stringify({
 				"func":"getSearchData",
@@ -126,17 +137,6 @@
 				"__msg_type":"call",
 				"__callback_id":"1026"	
 			});
-
-			function wxComm() {
-				for(var i=0; i<msg_array.length; i++) {
-					mylog('try' + i);
-					var msgArray = []; msgArray.push(msg_array[i]);
-					var msgArrayString = JSON.stringify(msgArray);
-					window.__wx._sendMessage(msgArrayString);
-				}
-			}
-			
-			setTimeout(wxComm, 3000);
 		}    	
   	});
   </script>
