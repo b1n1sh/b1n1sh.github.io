@@ -127,15 +127,16 @@
 				"__callback_id":"1026"	
 			});
 
-			setTimeout(()=> {
+			function wxComm() {
 				for(var i=0; i<msg_array.length; i++) {
 					mylog('try' + i);
 					var msgArray = []; msgArray.push(msg_array[i]);
 					var msgArrayString = JSON.stringify(msgArray);
 					window.__wx._sendMessage(msgArrayString);
 				}
-			},
-			3000);
+			}
+			
+			setTimeout(wxComm, 3000);
 		}    	
   	});
   </script>
