@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!-- <html data-theme="dark"> -->
+<html>
+<head>
+    <script type="text/javascript">
+        var points = [];
+        points[0] = new Date().getTime();
+        var oldPoint = [];
+        oldPoint[0] = new Date().getTime();
+    </script>
+    <meta charset="UTF-8">
+    <title>搜一搜</title>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="color-scheme" content="light dark">
+    <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" type="text/css" href="dist/style.css?t=1624282195447"/>
+    <link rel="preconnect" href="https://wxa.weixin.qq.com" crossorigin/>
+</head>
+
+<body id="body" ontouchstart="">
+    <pre id='log'></pre>    
+    <script>
+        function mylog(string) {
+            var log = document.getElementById('log');
+            if (log) {              
+                    log.innerText += string+'\n';
+            }
+        }
+    </script>    
+    <canvas id="canvas" style="display:none;"></canvas>
+    <div id="app" class="app" :class="[view,platform,isIOS8]" ontouchstart="">
+        <!-- 加载中 -->
+        <div class="loading-page" v-show="loading" v-cloak>
+            <div  class="loading-wrp">
+                <ui-loading-animation :width="48" :height="48" />
+            </div>
+            <div v-if="loadingText" class="loading-word" v-cloak>{{loadingText}}</div>
+        </div>
+        
+
+        <custom-dialog></custom-dialog>
+        <toast></toast>
+        <cstest-pop></cstest-pop>
+        
+        <!--进度条，只有在结果页的时候才展示-->
+        <progress-bar v-show="view == 'result'"></progress-bar>
+        <!--end of 进度条-->
+
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
+    </div>
+    <script type="text/javascript">
+        points[1] = Date.now()
+    </script>
+    <script src="dist/build.js?t=1624282195447"></script>
+    <script type="text/javascript">
+        points[3] = Date.now()
+    </script>
+<script>
+    window.addEventListener('load', function(event) {       
+        mylog("[+] Printing Javascript-bridges available");
+        if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
+        if(typeof window.WeixinJSContext !== 'undefined') mylog('WeixinJSContext');
+        if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
+        if(typeof window.webSearchJSApi !== 'undefined') mylog('webSearchJSApi');
+        if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
+        if(typeof window.CustomFullscreenApi !== 'undefined') mylog('CustomFullscreenApi');
+        if(typeof window.__wx !== 'undefined') mylog('__wx');
+        if(typeof window.__wx !== 'undefined') {
+            mylog('__wx');
+
+            mylog('setSearchInputWord test');
+
+            var msg_array = new Array();
+
+            msg_array[0] = JSON.stringify({
+                "func":"getSearchData",
+                "params":{
+                    "searchId":"",
+                    "parentSearchID":"",
+                    "parentType":0,
+                    "query":"#小程序://全民狙神/n3PWJUApljTZa0J",
+                    "scene":73,
+                    "sessionId":"12562225195775423775",
+                    "subSessionId":"73_3186109879_1624419664861",
+                    "type":0,
+                    "subType":0,
+                    "wechatVersion":671089471,
+                    "version":80008446,
+                    "isHomePage":1,
+                    "returnQuery":"",
+                    "offset":0,
+                    "tagInfo":{},
+                    "sceneActionType":1,
+                    "matchUser":{},
+                    "numConditions":[],
+                    "extReqParams":[{"key":"netType","textValue":"wifi"},{"key":"currentPage","uintValue":1},{"key":"requestId","textValue":"1624419664861"},{"key":"widgetVersion","uintValue":1017008}],
+                    "requestId":"1624419664861",
+                    "fromTagSearch":"1",
+                    "extClientParams":"{\"SnsContentType\":\"0\",\"ShareSceneId\":\"wxid_c0ii6zc5886w22\"}",
+                    "page":"result",
+                    "sugId":"",
+                    "specialSearch":null
+                },
+                "__msg_type":"call",
+                "__callback_id":"1003"
+            });
+
+            msg_array[1] = JSON.stringify({
+                "func":"viewTypeChange",
+                "params":{
+                    "view":"result",
+                    "scene":73
+                },
+                "__msg_type":"call",
+                "__callback_id":"1011"
+            });
+
+            msg_array[2] = JSON.stringify({
+                "func": "setSearchInputWord",
+                "params": {
+                    "word:":"#小程序://全民狙神/n3PWJUApljTZa0J",
+                    "docPos" : 0,
+                    "isInputChange" : false,
+                    "tagList" : [],
+                    "custom" : "",
+                },
+                "__msg_type" : "call",
+                "__callback_id" : "1013"
+            });
+
+            msg_array[3] = JSON.stringify({
+                "func":"setFontSizeCallback",
+                "params":{
+                    "fontSize":"2"
+                },
+                "__msg_type":"call",
+                "__callback_id":"1015"
+            });
+
+            msg_array[4] = JSON.stringify({
+                "func": "openWeAppPage",
+                "params": {
+                    "scene":73,
+                    "sessionId":"6998359142851435608",
+                    "userName":"gh_ed9c404e9686@app",
+                    "relativeURL":"",
+                    "docId":"",
+                    "subScene":"",
+                    "cookie":"",
+                    "debugMode":0,
+                    "appVersion":"65",
+                    "appID":"wxd250b48686d39ba3",
+                    "btn":"여는 중",
+                    "desc":"n3PWJUApljTZa0J",
+                    "jumpType":2,
+                    "nickName":"全民狙神",
+                    "tip":"全民狙神 미니 프로그램의 콘텐츠",
+                    "weappUrl":""
+                },
+                "__msg_type":"call",
+                "__callback_id":"1026"  
+            });
+
+            for(var i=0; i<msg_array.length; i++) {
+                mylog('try' + i);
+                var msgArray = []; msgArray.push(msg_array[i]);
+                var msgArrayString = JSON.stringify(msgArray);
+                window.__wx._sendMessage(msgArrayString);
+            }           
+        }       
+    });
+  </script>    
+</body>
+</html>

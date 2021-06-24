@@ -1,5 +1,6 @@
+<html>
 <body>
-	<pre id='log'></pre>
+	<pre id='log'></pre>	
 	<script>
 		function mylog(string) {
 		  	var log = document.getElementById('log');
@@ -7,29 +8,90 @@
 		    		log.innerText += string+'\n';
 		  	}
 		}
-	</script>  
-  <a href="javascript:WeixinJSContext.allocEmpty()" onclick="leak()">CLICK</a>
-  <a href="javascript:xwebToNative.onVideoError(1, '<script>alert(1);</script>')">onVideoError</a>
-  <a href="javascript:xwebToNative.onVideoEnterFullscreen(false, 0, 0, 0, false, false, 0, 0, [])">onVideoEnterFullscreen</a>
-  <a href="javascript:xwebToNative.onVideoGetFrame(0, 0, 'data:image/png;base64,PHNjcmlwdD5hbGVydCgiWFNTIik7PC9zY3JpcHQ+Cg==')">onVideoGetFrame</a>
-  <a href="javascript:WeixinJSBridge.call('alert(1)', {}, 'function x() { alert(2); }')">call TEST</a>
+	</script>
 
-  <script>
+	<script>
+		/*
+		window.WeixinJSBridge = { 
+			_handleMessageFromWeixin:function(msg) {
+				mylog("Hook _handleMessageFromWeixin");
+				var msg_str = JSON.stringify(msg);
+				mylog(msg_str);				
+			}
+		}
+		*/
+	</script>
+
+	<script>
+		function test() {
+			mylog("test");
+
+			var msg = JSON.stringify({
+				"__msg_type":"event",
+				"__event_id":"onSearchDataReady",
+				"__params": {
+					"requestId":"1624260100272",
+					"json":"{\"SearchID\":\"8369370152922436064\",\"enterJumpInfo\":{\"appID\":\"wxd250b48686d39ba3\",\"appVersion\":\"65\",\"btn\":\"여는 중\",\"debugMode\":0,\"desc\":\"n3PWJUApljTZa0J\",\"jumpType\":2,\"nickName\":\"全民狙神\",\"tip\":\"\\\"全民狙神\\\" 미니 프로그램의 콘텐츠\",\"userName\":\"gh_ed9c404e9686@app\",\"weappUrl\":\"\"},\"query\":\"#小程序:\/\/全民狙神\/n3PWJUApljTZa0J\",\"ret\":0}\n",
+					"newQuery":true
+				}
+			});
+
+			window.WeixinJSBridge._handleMessageFromWeixin(msg);
+		};		
+	</script>
+
+	<script>
   	window.addEventListener('load', function(event) {
-  		if(typeof window.WeixinJSBridge === 'undefined') mylog('WeixinJSBridge undefined');
-    	if(typeof window.WeixinJSContext === 'undefined') mylog('WeixinJSContext undefined');
-    	if(typeof window.xwebToNative === 'undefined') mylog('xwebToNative undefined');
-		if(typeof window.__wx === 'undefined') mylog('__wx undefined');
-    	if(typeof window.__wxtag === 'undefined') mylog('__wxtag undefined');
+  		mylog("[+] Printing Javascript-bridges available");
+  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
+    	if(typeof window.WeixinJSContext !== 'undefined') mylog('WeixinJSContext');
+    	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
+    	if(typeof window.webSearchJSApi !== 'undefined') mylog('webSearchJSApi');
+    	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
+    	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('CustomFullscreenApi');
+    	if(typeof window.__wx !== 'undefined') mylog('__wx');
 
-  		var a = window.__wx._getAllHosts("google.com, alert(1)");
-  		mylog(a);  	
-  		var c = window.__wx._getDgtVerifyRandomStr();
-  		mylog(c);
-  		var b = window.__wx._getHtmlContent("ABCD");
-  		mylog(b);
-  		var d = window.__wx._sendMessage("{'babo':'hoho'}");
-  		mylog(d);
+		if(typeof window.__wx !== 'undefined') {
+			// mylog('__wx');
+			var msg = JSON.stringify({
+				"func": "openWeAppPage",
+				"params": {
+					"scene":73,
+					"sessionId":"6998359142851435608",
+					"userName":"gh_ed9c404e9686@app",
+					"relativeURL":"",
+					"docId":"",
+					"subScene":"",
+					"cookie":"",
+					"debugMode":0,
+					"appVersion":"65",
+					"appID":"wxd250b48686d39ba3",
+					"btn":"여는 중",
+					"desc":"n3PWJUApljTZa0J",
+					"jumpType":2,
+					"nickName":"全民狙神",
+					"tip":"全民狙神 미니 프로그램의 콘텐츠",
+					"weappUrl":""
+				},
+				"__msg_type":"call",
+				"__callback_id":"1026"	
+			});
+
+			var msgArray = []; msgArray.push(msg);
+    		var msgArrayString = JSON.stringify(msgArray);
+
+			window.__wx._sendMessage(msgArrayString);
+		}
+
+		// test();
+    	
+    	/*
+    	[+] WebView evaluateJavascript name:  javascript:WeixinJSBridge._handleMessageFromWeixin({"__msg_type":"event","__event_id":"menu:setfont","__params":{"fontSize":"2"}})
+[+] WebView evaluateJavascript name:  javascript:WeixinJSBridge._handleMessageFromWeixin({"__msg_type":"event","__event_id":"onGetVertSearchEntriesData","__params":{"title":"유형별 검색","items":[{"businessType":8,"hotword":"모멘트","optype":5},{"businessType":2,"hotword":"글","optype":5},{"businessType":1,"hotword":"공식 계정","optype":5},{"businessType":1024,"hotword":"책","optype":5},{"businessType":512,"hotword":"음악","optype":5},{"businessType":384,"hotword":"스티커","optype":5}]}})
+[+] WebView evaluateJavascript name:  javascript:WeixinJSBridge._handleMessageFromWeixin({"__msg_type":"event","__event_id":"onSearchDataReady","__params":{"requestId":"1624262638994","json":"{\"SearchID\":\"301981404137340206\",\"enterJumpInfo\":{\"appID\":\"wxd250b48686d39ba3\",\"appVersion\":\"65\",\"btn\":\"여는 중\",\"debugMode\":0,\"desc\":\"n3PWJUApljTZa0J\",\"jumpType\":2,\"nickName\":\"全民狙神\",\"tip\":\"\\\"全民狙神\\\" 미니 프로그램의 콘텐츠\",\"userName\":\"gh_ed9c404e9686@app\",\"weappUrl\":\"\"},\"query\":\"#小程序:\/\/全民狙神\/n3PWJUApljTZa0J\",\"ret\":0}\n","newQuery":true}})
+
+		*/
   	});
   </script>
-</body> 
+</body>
+</html>

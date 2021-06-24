@@ -1,0 +1,29 @@
+<html>
+	<body>
+			<script>
+				function assertTrue(c) {
+				     if (!c) { document.write("Assertion failed"); }
+				     else document.write("Not vulnerable..");
+				}
+
+				function assertFalse(c) {
+				    assertTrue(!c);
+				}
+
+				function foo(a) {
+				  var y = 0x7fffffff; // INT_MAX (2^31 - 1)
+				  // Widen the static type of y (this condition never holds).
+				  if (a == NaN) y = NaN;
+				  // The next condition holds only in the warmup run. It leads to Smi
+				  // (SignedSmall) feedback being collected for the addition below.
+				  if (a) y = -1;
+				  const z = (y + 1)|0;
+				  return z < 0;
+				}
+				for (var i=0; i<0x3000; ++i) {
+				    foo(true);
+				}
+				assertTrue(foo(false)); // fail 
+			</script>
+	</body>
+</html>
