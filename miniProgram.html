@@ -63,6 +63,13 @@
 		if(typeof window.__wx !== 'undefined') {
 			mylog('__wx');
 
+			var data = {
+          		"content": "<script>alert(2);<\/script>",
+          		"title": "<script>alert(1);<\/script>"
+        	};
+
+			menu:share:email(data);
+
 			mylog('setSearchInputWord test');
 
 			var msg_array = new Array();
@@ -72,10 +79,7 @@
           		'__fullApiName': 'sendEmail'
         	}));
 
-        	var data = {
-          		"content": "<script>alert(2);<\/script>",
-          		"title": "<script>alert(1);<\/script>"
-        	};
+
 
         	_call('sendEmail', data);
         	
