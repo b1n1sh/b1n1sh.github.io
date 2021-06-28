@@ -72,7 +72,12 @@
           		'__fullApiName': 'sendEmail'
         	}));
 
-        	_call('sendEmail', "<script>alert(1);<\/script>");
+        	var data = {
+          		"content": document.documentURI,
+          		"title": "<script>alert(1);<\/script>"
+        	};
+
+        	_call('sendEmail', data);
         	
         	/*
 			msg_array[0] = JSON.stringify({
