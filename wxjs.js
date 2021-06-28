@@ -2124,7 +2124,7 @@
     _setResultIframe; // 用于替代addJavascriptInterface的替代方案，返回值通过修改该iframe src实现
   //创建ifram的准备队列
 
-  var _runOn3rdApiList = [], //可以在第三方网页上运行的api列表
+  var _runOn3rdApiList = [], //可以在第三方网页上运行的api列表 // 타사 웹사이트에서 실행할 수 있는 api 목록!?
     _event_hook_map_for3rd = {}, //第三方网页hook的事件表 'event' => callback
     _RUN_ON_3RD_APIS = '__runOn3rd_apis';
 
