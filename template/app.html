@@ -48,5 +48,13 @@
     <script type="text/javascript">
         points[3] = Date.now()
     </script>
+    <script>
+        window.addEventListener('message', receiveMsgFromParent);
+        function receiveMsgFromParent(e) {
+            if(e.data == "go") {
+                WeixinJSBridge._handleMessageFromWeixin({"__msg_type":"event","__event_id":"sys:auth","__params":{"state":"authorized"}});
+            }
+        }
+    </script>
 </body>
 </html>
