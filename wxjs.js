@@ -5,6 +5,9 @@
   var __initLogArr = ["start"];
   try {
   var __DL = 0, __IL = 1, __EL = 2, __initLogLvl = __IL;
+
+  // 콘솔 로그 찍기
+  // 메신저에서는 콘솔 로그 볼려면 vConsole 붙여놓으면 될 것 같네
   function __initLog(lvl) {
     __initLogArr.push(arguments);
     if (lvl >= __initLogLvl) {
@@ -12,6 +15,7 @@
     }
   }
 
+  // 이미 WeixinJSBridge가 window 객체의 프로퍼티로 등록되어 있으면 다시 로드하지 않음
   if (window.WeixinJSBridge) {
     // Android加上了这个if判断，如果当前window已经定义了WeixinJSBridge对象，不再重新加载
     // 避免重新初始化_callback_map等变量，导致之前的消息回调失败，返回cb404
@@ -19,6 +23,7 @@
     return;
   };
 
+  // 얘네는 이상하게 이렇게 실행하는데 걸린 시간을 체크하더라? 흠
   var execStartTime = Date.now();
 
   function _isTmpl(t) { return t.indexOf('${') == 0 && t.indexOf('}') == t.length - 1 }
@@ -743,7 +748,7 @@
     $._WXJS = _WXJS
     __initLog(__DL, "_WXJS init finished");
     return $
-  })()
+  })() // 이건 도대체 뭘하는건지... jquery를 위한 온갖 이상한 짓을 엄청하네..
 
   // If `$` is not yet defined, point it to `_WXJS`
   window._WXJS = _WXJS;
@@ -2103,13 +2108,16 @@
   })();
   __initLog(__DL, "UTF8 HEX base64 CryptoJS init");
 
+  // 위의 코드들은 뭔가 유틸리티? 같기도 하고 잘 모르겠음
   /* ========== REAL WXJS START ========== */
 
+  // window.__wx 프로퍼티를 __wx 변수로 옮기고 window.__wx 프로퍼티를 지움으로써,
+  // 다른 웹페이지에서 __wx 브릿지를 사용할 수 없게 한다. 나쁜놈들ㅋㅋㅋ
   var __wx = window.__wx;
   if (!__wx) return "WeixinJSBridge init err: __wx not found"
   delete window.__wx;
 
-  var _readyMessageIframe, _sendMessageQueue = [],
+  var _readyMessageIframe, _sendMessageQueue = [], // 이런 변수는 쓰지도 않음
     _receiveMessageQueue = [],
     _callback_count = 1000,
     _callback_map = {},
@@ -2123,9 +2131,10 @@
     _QUEUE_HAS_MESSAGE = 'dispatch_message/',
     _setResultIframe; // 用于替代addJavascriptInterface的替代方案，返回值通过修改该iframe src实现
   //创建ifram的准备队列
+  // addJavascriptInterface 대안으로 iframe src를 수정해서 반환 값을 얻을 수 있다는 주석인데, 무슨 말이지?!  
 
   var _runOn3rdApiList = [], //可以在第三方网页上运行的api列表 // 타사 웹사이트에서 실행할 수 있는 api 목록!?
-    _event_hook_map_for3rd = {}, //第三方网页hook的事件表 'event' => callback
+    _event_hook_map_for3rd = {}, //第三方网页hook的事件表 'event' => callback // 타사 웹사이트의 hook 이벤트 테이블
     _RUN_ON_3RD_APIS = '__runOn3rd_apis';
 
   var _JSON_MESSAGE = '__json_message',
@@ -2133,6 +2142,9 @@
     _CONTEXT_KEY = '__context_key',
     _context_val = '',
     _SHA_KEY = '__sha_key',
+    // _xxyy는 랜덤한 문자열로 웹뷰에서 아래 예제처럼 사용됩디다..
+    // [+] WebView evaluateJavascript( javascript:WeixinJSBridge._handleMessageFromWeixin({"__json_message":{"__event_id":"sys:updateRandomStr","randomStr":"Pvv4Ago2Fwky9MrQ"}}) )
+    // [+] WebView evaluateJavascript( javascript:WeixinJSBridge._handleMessageFromWeixin({"__json_message":{"__msg_type":"event","__event_id":"sys:auth","__params":{"state":"authorized"}},"__sha_key":"4738b2e42b4605dc35675848c80d1851409db852"}) )
     _xxyy = __dgtRdm || __wx._getDgtVerifyRandomStr && __wx._getDgtVerifyRandomStr(),
     isDgtVerifyEnabled = __dgtOn || __wx._isDgtVerifyEnabled && __wx._isDgtVerifyEnabled(),
     authState = 'unauthorized';
@@ -2171,6 +2183,8 @@
   };
 
   function _handleMessageFromWeixin(message) {
+    // 혹시라도 Object.defineProperty()를 통해 var __WeixinJSBridge에 등록한 _handleMessageFromWeixin 함수가 변조되었는지 체크하는 루틴 ㅋㅋㅋ
+    // 꼼꼼하기도 하셔라.. 이하 모든 함수에서 다 이런식으로 체크를 한다-_-;;
     var curFuncIdentifier = __WeixinJSBridge._handleMessageFromWeixin;
     if (curFuncIdentifier !== _handleMessageIdentifier) {
       return '{}';
@@ -2218,9 +2232,10 @@
       case 'event':
         {
           if (typeof msgWrap[_EVENT_ID] === 'string') {
+            // _event_hook_map_for3rd 배열에 이미 함수가 정의되어 있으면 __fullApiName 같은걸 전달하는데 이 경우는 잘 안보임
             if (typeof _event_hook_map_for3rd[msgWrap[_EVENT_ID]] === 'function' && _isIn3rdApiList(msgWrap[_EVENT_ID])) {
               var shareEvents = ['menu:share:timeline', 'menu:share:qq', 'menu:share:weiboApp', 'menu:share:QZone', 'menu:share:appmessage', 'menu:share:email']
-              if (shareEvents.indexOf(msgWrap[_EVENT_ID]) > -1) { // 判断是否分享事件，这里漏了要加上
+              if (shareEvents.indexOf(msgWrap[_EVENT_ID]) > -1) { // 判断是否分享事件，这里漏了要加上 // shareEvents에 해당할 경우는 아래처럼 __wx._sendMessage()을 직접 호출하게 됨
                 // 自定义分享内容，申请分享权限
                 _sendMessage(JSON.stringify({
                   '__handleFromWeixin': _xxyy,
@@ -2228,9 +2243,11 @@
                 }));
               }
 
+              // 그 이외의 이벤트(예:sys_attach_runOn3rd_apis)라면 
               var ret = _event_hook_map_for3rd[msgWrap[_EVENT_ID]](msgWrap['__params']);
               return JSON.stringify(ret);
             } else if (typeof _event_hook_map[msgWrap[_EVENT_ID]] === 'function') {
+              // 대다수는 이 경우로 빠지는 듯.. 콜백을 호출하면서 __params를 인자로 전달함
               var ret = _event_hook_map[msgWrap[_EVENT_ID]](msgWrap['__params']);
               return JSON.stringify(ret);
             }
@@ -2398,8 +2415,13 @@
     });
   }
 
+  // wxjs.js 파일이 로드되면 자동으로 호출되면서 _event_hook_map 테이블에 이벤트와 콜백을 등록함
   function _setDefaultEventHandlers() {
-    // set font
+    // _event_hook_map 테이블에 이벤트별 콜백을 등록함    
+    // _event_hook_map['menu:setfont'] = function (argv) { }
+    // 예로 menu:setfont 이벤트 콜백은 _call('setFontSizeCallback', "fontSize": "2")이 호출될거고, 결국 아래처럼 __wx._sendMessage()가 호출됨
+    // __wx._sendMessage(["{\"func\":\"setFontSizeCallback\",\"params\":{\"fontSize\":\"2\"},\"__msg_type\":\"call\",\"__callback_id\":\"1015\"}"])
+    // 그러면 네이티브 코드 뭐시기가 호출되면서 실제 폰트 사이즈가 2가 되겠지
     _on('menu:setfont', function (argv) {
       if (typeof changefont === 'function') {
         var num = parseInt(argv.fontSize);
@@ -2920,6 +2942,14 @@
 
     });
 
+    // 웹뷰에서 evaluateJavascript()가 아래처럼 호출되면,
+    // [+] WebView evaluateJavascript name:  javascript:WeixinJSBridge._handleMessageFromWeixin({"__msg_type":"event","__event_id":"sys:attach_runOn3rd_apis", \
+    // "__params":{"__runOn3rd_apis":["menu:share:timeline","menu:share:appmessage","menu:share:qq","menu:share:weiboApp","menu:share:QZone","sys:record","onVoiceRecordEnd","onVoicePlayBegin","onVoicePlayEnd","onLocalImageUploadProgress","onImageDownloadProgress","onVoiceUploadProgress","onVoiceDownloadProgress","onVideoUploadProgress","onPlayerProcessStateChanged","onMediaFileUploadProgress","menu:setfont","menu:haokan","topbar:click","reportOnLeaveForMP","onMPPageAction","onMPVideoStateChange","onReceiveMPPageData","onMPAdWebviewStateChange","onScreenShot","menu:share:email","wxdownload:state_change","wxdownload:progress_change","hdOnDeviceStateChanged","activity:state_change","onWindowFocusChanged","onVideoPlay","onVideoPause","onVideoEnded","onVideoWaiting","onVideoBufferUpdate","onVideoTimeUpdate","onVideoError","onVideoLoadedMetaData","onEnterFullscreen","onExitFullscreen","onOrientationsChange","onWXDeviceBluetoothStateChange","onWXDeviceLanStateChange","onWXDeviceBindStateChange","onReceiveDataFromWXDevice","onScanWXDeviceResult","onWXDeviceStateChange","onNfcTouch","onBeaconMonitoring","onBeaconsInRange","menu:custom","onMenuClick","onSearchWAWidgetOpenApp","onSearchDataReady","onCurrentLocationReady","onClientNavAction","onNavBarShadowManuallyHidden","onChatSearchDataReady","onGetPoiInfoReturn","onSearchHistoryReady","onSearchWAWidgetOnTapCallback","onSearchImageListReady","onTeachSearchDataReady","onSearchGuideDataReady","onUxOplogDataReady","onSearchInputChange","onSearchInputConfirm","onSearchSuggestionDataReady","onMusicStatusChanged","switchToTabSearch","onVideoPlayerCallback","onSelectContact","onSearchWAWidgetAttrChanged","onSearchWAWidgetReloadData","onSearchWAWidgetReloadDataFinish","onSearchWAWidgetStateChange","onSearchWAWidgetDataPush","emoticonIsChosen","onSimilarEmoticonReady","onSearchWebQueryReady","onGetVertSearchEntriesData","onPullDownRefresh","onPageStateChange","onGetKeyboardHeight","onGetSmiley","onAddShortcutStatus","onFocusSearchInput","onGetA8KeyUrl","deleteAccountSuccess","onGetMsgProofItems","WNJSHandlerInsert","WNJSHandlerMultiInsert","WNJSHandlerExportData","WNJSHandlerHeaderAndFooterChange","WNJSHandlerEditableChange","WNJSHandlerEditingChange","WNJSHandlerSaveSelectionRange","WNJSHandlerLoadSelectionRange","onCustomGameMenuClicked","showLoading","getSearchEmotionDataCallBack","onNavigationBarRightButtonClick","onSearchActionSheetClick","onGetMatchContactList","onUiInit","onNetWorkChange","onMiniProgramData","onBackgroundAudioStateChange","onArticleReadingBtnClicked","onReceivePageData","onPageAuthOK","onScrollViewDidScroll","onPublishHaowanEnd","onPublishHaowanProgress"]}})
+    
+    // _event_hook_map['sys:attach_runOn3rd_apis']의 콜백(아래 함수)을 호출하게 된다.
+    // _runOn3rdApiList에다가 menu:share:timeline부터 시작하는 이벤트를 저장함
+    // _runOn3rdApiList를 기억해야 함
+    // 우리가 분석해보려는 api들은 _runOn3rdApiList 배열에 저장되어 있음
     _on('sys:attach_runOn3rd_apis', function (ses) {
       if (typeof ses[_RUN_ON_3RD_APIS] === 'object') {
         _runOn3rdApiList = ses[_RUN_ON_3RD_APIS];
@@ -2963,7 +2993,7 @@
       getSharePreviewImageForRecordHistory(shareFunc);
 
     });
-  }
+  } // end
 
   var domain_list = [];
 
@@ -3037,24 +3067,24 @@
     _createdByScriptTag: (document.currentScript !== 'undefined')
   };
 
-  // Add _handleMessageFromWeixin function to __WeixinJSBridge
+  // var __WeixinJSBridge에다가 _handleMessageFromWeixin 함수를 추가
   try {
     Object.defineProperty(__WeixinJSBridge, '_handleMessageFromWeixin', {
       value: _handleMessageFromWeixin,
-      writable: false,
-      configurable: false
+      writable: false, // 추후에 값을 수정할 수 없다
+      configurable: false // delete 등을 사용해서 속성 삭제 불가
     });
   } catch (e) {
     __initLog(__EL, "define _handleMessageFromWeixin", e)
     return "WeixinJSBridge init err:" + e.message
   }
 
-
-
-  // Attach WeixinJSBridge property to window object
-  // window.WeixinJSBridge.invoke
-  // window.WeixinJSBridge.call
-  // window.WeixinJSBridge.on, log, env, state, _hsInit, _createByScriptTag
+  // window 객체에 WeixinJSBridge 프로퍼티를 추가함
+  // 그래서 window.WeixinJSBridge라고 쓸 수 있고,
+  // 그때 추가되는 프로퍼티의임 엘리먼트들은 var __WeixinJSBridge에 연결된 것들
+  // 그래서 window.WeixinJSBridge.invoke(), call(), on(), _handleMessageFromWeixin() 등을 쓸 수 있음
+  // 결론적으로 window.__wx 브릿지를 남들이(?) 못쓰게 지우고 wxjs.js 파일에서만 __wx로 쓸 수 있음
+  // 그래서 __wx 브릿지의 sendMessage()를 호출하려면 window.WeixinJSBridge._handleMessageFromWeixin()을 이용하면 됨
   try {
     Object.defineProperty(window, 'WeixinJSBridge', {
       value: __WeixinJSBridge,
@@ -3067,6 +3097,7 @@
   }
   __initLog(__DL, "__wx bind");
 
+  // 
   _setDefaultEventHandlers();
 
   __wx._ready(true);
