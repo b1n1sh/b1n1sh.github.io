@@ -52,8 +52,8 @@
 	    _sendMessage_(JSON.stringify(msgObj));	    
   	}
 
-  	if(typeof window.__wx === 'undefined') mylog('__wx undefined!');
-  	else {
+  	//if(typeof window.__wx === 'undefined') mylog('__wx undefined!');
+  	//else {
   		setTimeout(()=> {
 			mylog('sendEmail test');
 			var data = {
@@ -69,7 +69,7 @@
 	    	_call_('sendEmail', data);
 
 		}, 5000);
-  	}
+  	//}
 
   // 	window.addEventListener('load', function(event) {
   // 		mylog("[+] Printing Javascript-bridges available");
