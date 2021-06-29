@@ -56,9 +56,13 @@
   	//else {
   		setTimeout(()=> {
   			if(typeof window.__wx === 'undefined') {
-  				mylog('__wx undefined!');
+  				mylog('window.__wx undefined!');
   			}
-  			
+
+  			if(typeof __wx === 'undefined') {
+				mylog('__wx undefined!');
+  			}
+
 			mylog('sendEmail test');
 			__wx._ready(true);
 
