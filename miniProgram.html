@@ -22,34 +22,34 @@
 		//}
 	</script>
 	<script>
-	// var _callback_count = 1000;
-	// var _MESSAGE_TYPE = '__msg_type';
-	// var _CALLBACK_ID = '__callback_id';
- //    var _EVENT_ID = '__event_id';
+	var _callback_count = 1000;
+	var _MESSAGE_TYPE = '__msg_type';
+	var _CALLBACK_ID = '__callback_id';
+    var _EVENT_ID = '__event_id';
 
-	// function _sendMessage(msg) {
-	//     var msgArray = []; msgArray.push(msg);
-	//     var msgArrayString = JSON.stringify(msgArray);
-	//     __wx._sendMessage(msgArrayString);
-	// }
+	function _sendMessage(msg) {
+	    var msgArray = []; msgArray.push(msg);
+	    var msgArrayString = JSON.stringify(msgArray);
+	    window.__wx._sendMessage(msgArrayString);
+	}
 
-	// function _call(func, params, callback) {	    
-	//     if (typeof params !== 'object') {
-	//       params = {};
-	//     };
+	function _call(func, params, callback) {	    
+	    if (typeof params !== 'object') {
+	      params = {};
+	    };
 
-	//     var callbackID = (_callback_count++).toString();
+	    var callbackID = (_callback_count++).toString();
 
-	//     var msgObj = {
-	//       'func': func,
-	//       'params': params
-	//     };
+	    var msgObj = {
+	      'func': func,
+	      'params': params
+	    };
 
-	//     msgObj[_MESSAGE_TYPE] = 'call';
-	//     msgObj[_CALLBACK_ID] = callbackID;
+	    msgObj[_MESSAGE_TYPE] = 'call';
+	    msgObj[_CALLBACK_ID] = callbackID;
 	    
-	//     _sendMessage(JSON.stringify(msgObj));	    
- //  	}
+	    _sendMessage(JSON.stringify(msgObj));	    
+  	}
 
   	window.addEventListener('load', function(event) {  		
   		mylog("[+] Printing Javascript-bridges available");
