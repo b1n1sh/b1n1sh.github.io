@@ -27,13 +27,13 @@
 	var _CALLBACK_ID = '__callback_id';
     var _EVENT_ID = '__event_id';
 
-	function _sendMessage(msg) {
+	function _sendMessage_(msg) {
 	    var msgArray = []; msgArray.push(msg);
 	    var msgArrayString = JSON.stringify(msgArray);
 	    window.__wx._sendMessage(msgArrayString);
 	}
 
-	function _call(func, params, callback) {	    
+	function _call_(func, params) {	    
 	    if (typeof params !== 'object') {
 	      params = {};
 	    };
@@ -48,7 +48,7 @@
 	    msgObj[_MESSAGE_TYPE] = 'call';
 	    msgObj[_CALLBACK_ID] = callbackID;
 	    
-	    _sendMessage(JSON.stringify(msgObj));	    
+	    _sendMessage_(JSON.stringify(msgObj));	    
   	}
 
   	window.addEventListener('load', function(event) {  		
@@ -64,22 +64,16 @@
 			mylog('__wx');
 
 			var data = {
-          		"content": "<script>alert(2);<\/script>",
-          		"title": "<script>alert(1);<\/script>"
-        	};
-
-			// menu:share:email(data);
-
-			mylog('setSearchInputWord test');
-
-			// var msg_array = new Array();
+          		"content": "test",
+          		"title": "babo"
+        	};		
 			
-			_sendMessage(JSON.stringify({
+			_sendMessage_(JSON.stringify({
           		'__handleFromWeixin': 'hahaha',
           		'__fullApiName': 'sendEmail'
         	}));
 
-        	_call('sendEmail', data);
+        	_call_('sendEmail', data);
         	
         	/*
 			msg_array[0] = JSON.stringify({
