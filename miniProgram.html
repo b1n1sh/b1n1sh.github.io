@@ -61,19 +61,22 @@
     	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('CustomFullscreenApi');
     	if(typeof window.__wx !== 'undefined') mylog('__wx');
 		if(typeof window.__wx !== 'undefined') {
-			mylog('__wx');
 
-			var data = {
-          		"content": "test",
-          		"title": "babo"
-        	};		
-			
-			_sendMessage_(JSON.stringify({
-          		'__handleFromWeixin': 'hahaha',
-          		'__fullApiName': 'sendEmail'
-        	}));
+			setTimeout(()=> {
+				var data = {
+          			"content": "test",
+          			"title": "babo"
+	        	};		
+				
+				_sendMessage_(JSON.stringify({
+	          		'__handleFromWeixin': 'hahaha',
+	          		'__fullApiName': 'sendEmail'
+	        	}));
 
-        	_call_('sendEmail', data);
+	        	_call_('sendEmail', data);
+
+			}, 5000);
+
         	
         	/*
 			msg_array[0] = JSON.stringify({
