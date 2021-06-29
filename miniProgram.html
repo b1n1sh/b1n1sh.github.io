@@ -31,7 +31,7 @@
 	    var msgArray = []; msgArray.push(msg);
 	    var msgArrayString = JSON.stringify(msgArray);
 	    mylog('__wx._sendMessage');
-	    window.__wx._sendMessage(msgArrayString);
+	    __wx._sendMessage(msgArrayString);
 	}
 
 	function _call_(func, params) {	    
@@ -55,7 +55,13 @@
   	//if(typeof window.__wx === 'undefined') mylog('__wx undefined!');
   	//else {
   		setTimeout(()=> {
+  			if(typeof window.__wx === 'undefined') {
+  				mylog('__wx undefined!');
+  			}
+  			
 			mylog('sendEmail test');
+			__wx._ready(true);
+
 			var data = {
 	  			"content": "test",
 	  			"title": "babo"

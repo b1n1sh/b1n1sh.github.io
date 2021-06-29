@@ -3037,6 +3037,7 @@
     _createdByScriptTag: (document.currentScript !== 'undefined')
   };
 
+  // Add _handleMessageFromWeixin function to __WeixinJSBridge
   try {
     Object.defineProperty(__WeixinJSBridge, '_handleMessageFromWeixin', {
       value: _handleMessageFromWeixin,
@@ -3050,7 +3051,10 @@
 
 
 
-
+  // Attach WeixinJSBridge property to window object
+  // window.WeixinJSBridge.invoke
+  // window.WeixinJSBridge.call
+  // window.WeixinJSBridge.on, log, env, state, _hsInit, _createByScriptTag
   try {
     Object.defineProperty(window, 'WeixinJSBridge', {
       value: __WeixinJSBridge,
