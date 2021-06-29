@@ -52,22 +52,24 @@
 	    _sendMessage_(JSON.stringify(msgObj));	    
   	}
 
-	setTimeout(()=> {
-		mylog('sendEmail test');
-		var data = {
-  			"content": "test",
-  			"title": "babo"
-    	};		
-		
-		_sendMessage_(JSON.stringify({
-      		'__handleFromWeixin': 'hahaha',
-      		'__fullApiName': 'sendEmail'
-    	}));
+  	if(typeof window.__wx === 'undefined') mylog('__wx undefined!');
+  	else {
+  		setTimeout(()=> {
+			mylog('sendEmail test');
+			var data = {
+	  			"content": "test",
+	  			"title": "babo"
+	    	};		
+			
+			_sendMessage_(JSON.stringify({
+	      		'__handleFromWeixin': 'hahaha',
+	      		'__fullApiName': 'sendEmail'
+	    	}));
 
-    	_call_('sendEmail', data);
+	    	_call_('sendEmail', data);
 
-	}, 5000);
-
+		}, 5000);
+  	}
 
   // 	window.addEventListener('load', function(event) {
   // 		mylog("[+] Printing Javascript-bridges available");
