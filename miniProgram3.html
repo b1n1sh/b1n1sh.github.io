@@ -24,11 +24,19 @@
 	    		__wx = window.__wx;
 	    		mylog('__wx');
 	    	}
+	    
+	     	if( typeof __wx !== 'undefined' ) {  				
+  				setTimeout(()=> {	
+  					mini();
+  				}, 5000);
+  			}
 	    });
   </script>
   <script>
   	function mini() 
   	{
+  		mylog("Let's call mini!");
+  		
   		var msg_array = new Array();
 
   		msg_array[0] = JSON.stringify({
@@ -125,13 +133,6 @@
 			var msgArrayString = JSON.stringify(msgArray);
 			__wx._sendMessage(msgArrayString);
 		}  	
-  	}
-
-  	if( typeof __wx !== 'undefined' ) {
-  		mylog("Let's call mini!");
-  		setTimeout(()=> {
-  			mini();
-  		}, 5000);
   	}
   </script>		
 </body>
