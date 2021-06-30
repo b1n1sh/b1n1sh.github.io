@@ -73,6 +73,7 @@
 	    	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('CustomFullscreenApi');
 	    	if(typeof window.__wx !== 'undefined') {
 	    		__Mywx = window.__wx;
+	    		__Mywx._ready(true);
 	    		mylog('__wx');
 	    	}
 	    	mylog("Print Javascript-bridges End");
