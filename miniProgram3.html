@@ -4,15 +4,51 @@
 	<h1>TEST H1</h1>
 	<pre id='log'></pre>	
 	<script>
+		var __wx = undefined;
+		var _callback_count = 1000;
+
 		function mylog(string) {
 		  	var log = document.getElementById('log');
 		  	if (log) {				
 		    		log.innerText += string+'\n';
 		  	}
 		}
-	</script>
-	<script>
-		var __wx;
+
+		function sendMessage(msg)
+	  	{
+	  		var msgArray = []; msgArray.push(msg);
+	  		var msgArrayString = JSON.stringify(msg);
+
+			__wx._sendMessage(msgArrayString);
+
+			mylog("sendMessage:"+msg['func']);
+	  	}
+
+	  	function call(func, params) {
+	  		if(typeof params !== 'object') {
+	  			params = {};
+	  		}
+
+	  		var callbackID = (_callback_count++).toString();
+
+	  		var msgObj = {
+	  			'func': func,
+	  			'params': params
+	  		};
+
+	  		msgObj['__msg_type'] = 'call';
+	  		msgObj['__callback_id'] = callbackID;
+
+	  		sendMessage(JSON.stringify(msgObj));
+	  	}
+
+	   	function setFontSizeCallback(fontSize)
+  		{  			
+  			call('setFontSizeCallback', {
+  				"fontSize" : fontSize
+  			});
+  		}
+
 	   	window.addEventListener('load', function(event) {
 	   		mylog("document load done");
 	  		mylog("[+] Printing Javascript-bridges available");
@@ -31,130 +67,10 @@
 	     		mylog(__wx._sendMessage);
 	     		mylog(__wx.__getDgtVerifyRandomStr);
   				setTimeout(()=> {	
-  					setFontSizeCallback(3);
+  					setFontSizeCallback(2);
   				}, 5000);
   			}
 	    });
-  </script>  
-  <script>
-  	function setFontSizeCallback(fontSize)
-  	{
-  		mylog("setFontSizeCallback()");
-
-  		var msg = JSON.stringify({
-  			"func":"setFontSizeCallback",
-  			"params": {
-  				"fontSize" : fontSize  				
-  			},
-  			"__msg_type":"call",
-  			"__callback_id":"1000"
-  		});
-
-  		var msgArrayString = JSON.stringify(msg);
-		__wx._sendMessage(msgArrayString);
-  	}
-
-  	function mini() 
-  	{
-  		mylog("Let's call mini!");
-
-  		var msg_array = new Array();
-
-  		msg_array[0] = JSON.stringify({
-			"func":"getSearchData",
-			"params":{
-				"searchId":"",
-				"parentSearchID":"",
-				"parentType":0,
-				"query":"#小程序://全民狙神/n3PWJUApljTZa0J",
-				"scene":73,
-				"sessionId":"12562225195775423775",
-				"subSessionId":"73_3186109879_1624419664861",
-				"type":0,
-				"subType":0,
-				"wechatVersion":671089471,
-				"version":80008446,
-				"isHomePage":1,
-				"returnQuery":"",
-				"offset":0,
-				"tagInfo":{},
-				"sceneActionType":1,
-				"matchUser":{},
-				"numConditions":[],
-				"extReqParams":[{"key":"netType","textValue":"wifi"},{"key":"currentPage","uintValue":1},{"key":"requestId","textValue":"1624419664861"},{"key":"widgetVersion","uintValue":1017008}],
-				"requestId":"1624419664861",
-				"fromTagSearch":"1",
-				"extClientParams":"{\"SnsContentType\":\"0\",\"ShareSceneId\":\"wxid_c0ii6zc5886w22\"}",
-				"page":"result",
-				"sugId":"",
-				"specialSearch":null
-			},
-			"__msg_type":"call",
-			"__callback_id":"1000"
-		});
-
-		msg_array[1] = JSON.stringify({
-			"func":"viewTypeChange",
-			"params":{
-				"view":"result",
-				"scene":73
-			},
-			"__msg_type":"call",
-			"__callback_id":"1001"
-		});
-
-		msg_array[2] = JSON.stringify({
-			"func": "setSearchInputWord",
-			"params": {
-				"word:":"#小程序://全民狙神/n3PWJUApljTZa0J",
-				"docPos" : 0,
-				"isInputChange" : false,
-				"tagList" : [],
-				"custom" : "",
-			},
-			"__msg_type" : "call",
-			"__callback_id" : "1002"
-		});
-
-		msg_array[3] = JSON.stringify({
-			"func":"setFontSizeCallback",
-			"params":{
-				"fontSize":"2"
-			},
-			"__msg_type":"call",
-			"__callback_id":"1003"
-		});
-
-		msg_array[4] = JSON.stringify({
-			"func": "openWeAppPage",
-			"params": {
-				"scene":73,
-				"sessionId":"6998359142851435608",
-				"userName":"gh_ed9c404e9686@app",
-				"relativeURL":"",
-				"docId":"",
-				"subScene":"",
-				"cookie":"",
-				"debugMode":0,
-				"appVersion":"65",
-				"appID":"wxd250b48686d39ba3",
-				"btn":"여는 중",
-				"desc":"n3PWJUApljTZa0J",
-				"jumpType":2,
-				"nickName":"全民狙神",
-				"tip":"全民狙神 미니 프로그램의 콘텐츠",
-				"weappUrl":""
-			},
-			"__msg_type":"call",
-			"__callback_id":"1004"	
-		});
-
-		for(var i=0; i<msg_array.length; i++) {			
-			var msgArray = []; msgArray.push(msg_array[i]);
-			var msgArrayString = JSON.stringify(msgArray);
-			__wx._sendMessage(msgArrayString);
-		}  	
-  	}
   </script>		
 </body>
 </html>
