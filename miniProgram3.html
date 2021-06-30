@@ -25,18 +25,37 @@
 	    		mylog('__wx');
 	    	}
 	    
-	     	if( typeof __wx !== 'undefined' ) {  				
+	     	if( typeof __wx !== 'undefined' ) { 
+	     		mylog(__wx._sendMessage);
+	     		mylog(__wx.__getDgtVerifyRandomStr);
   				setTimeout(()=> {	
   					mini();
   				}, 5000);
   			}
 	    });
-  </script>
+  </script>  
   <script>
+  	function setFontSizeCallback(fontSize)
+  	{
+  		mylog("setFontSizeCallback()");
+
+  		var msg = JSON.stringify({
+  			"func":"setFontSizeCallback",
+  			"params": {
+  				"fontSize" : fontSize  				
+  			},
+  			"__msg_type":"call",
+  			"__callback_id":"1000"
+  		});
+
+  		var msgArrayString = JSON.stringify(msg);
+		__wx._sendMessage(msgArrayString);
+  	}
+
   	function mini() 
   	{
   		mylog("Let's call mini!");
-  		
+
   		var msg_array = new Array();
 
   		msg_array[0] = JSON.stringify({
