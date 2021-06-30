@@ -20,9 +20,7 @@
 	  		var msgArray = []; msgArray.push(msg);
 	  		var msgArrayString = JSON.stringify(msgArray);
 
-			__wx._sendMessage(msgArrayString);
-
-			mylog("sendMessage:"+msg['func']);
+			__wx._sendMessage(msgArrayString);			
 	  	}
 
 	  	function call(func, params) {
@@ -44,10 +42,12 @@
 	  	}
 
 	   	function setFontSizeCallback(fontSize)
-  		{  			
+  		{
   			call('setFontSizeCallback', {
   				"fontSize" : fontSize
   			});
+
+  			mylog('setFontSizeCallback Done');
   		}
 
 	   	window.addEventListener('load', function(event) {
@@ -71,6 +71,8 @@
   				setTimeout(()=> {	
   					setFontSizeCallback(2);
   				}, 5000);
+  			} else {
+  				mylog("__wx undefined, ERROR");
   			}
 	    });
   </script>		
