@@ -75,6 +75,11 @@
   				mylog("__wx undefined, ERROR");
   			}
 	    });
-  </script>		
+
+	    if(typeof window.__wx !== 'undefined') {
+	    	__wx = window.__wx;
+	    	mylog('__wx');
+	    }
+  </script>
 </body>
 </html>
