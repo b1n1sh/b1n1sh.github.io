@@ -20,8 +20,7 @@
 	  		var msgArray = []; msgArray.push(msg);
 	  		var msgArrayString = JSON.stringify(msgArray);
 
-			var ret = __Mywx._sendMessage(msgArrayString);
-			mylog(ret);
+			__Mywx._sendMessage(msgArrayString);			
 	  	}
 
 	  	function call(func, params) {
