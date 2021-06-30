@@ -17,7 +17,7 @@
 		function sendMessage(msg)
 	  	{
 	  		var msgArray = []; msgArray.push(msg);
-	  		var msgArrayString = JSON.stringify(msg);
+	  		var msgArrayString = JSON.stringify(msgArray);
 
 			__wx._sendMessage(msgArrayString);
 
