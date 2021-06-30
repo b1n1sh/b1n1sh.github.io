@@ -1,0 +1,91 @@
+<html>
+<body>
+	<font size=5>(Font size 5) welcome to binish world</font><br>
+	<font size=10>(Font size 10) welcome to binish world</font><br>
+	<h1>This is H1 tag</h1>
+	<pre id='log'></pre>
+	<script>
+		var __Mywx = undefined;
+		var _callback_count = 1000;
+
+		function mylog(string) {
+		  	var log = document.getElementById('log');
+		  	if (log) {				
+		    		log.innerText += string+'\n';
+		  	}
+		}
+
+		function sendMessage(msg)
+	  	{
+	  		var msgArray = []; msgArray.push(msg);
+	  		var msgArrayString = JSON.stringify(msgArray);
+
+			var ret = __Mywx._sendMessage(msgArrayString);
+			mylog(ret);
+	  	}
+
+	  	function call(func, params) {
+	  		if(typeof params !== 'object') {
+	  			params = {};
+	  		}
+
+	  		var callbackID = (_callback_count++).toString();
+
+	  		var msgObj = {
+	  			'func': func,
+	  			'params': params
+	  		};
+
+	  		msgObj['__msg_type'] = 'call';
+	  		msgObj['__callback_id'] = callbackID;
+
+	  		sendMessage(JSON.stringify(msgObj));
+	  	}
+
+	   	function setFontSizeCallback(fontSize)
+  		{
+  			call('setFontSizeCallback', {
+  				"fontSize" : fontSize
+  			});
+
+  			mylog('setFontSizeCallback Done');
+  		}
+
+	   	function startRecord()
+  		{
+  			var data = {
+  				"appId" : "test",
+  				"duration" : 60
+  			};
+
+  			call('startRecord', data);
+
+  			mylog('startRecord Done');
+  		}
+
+	   	window.addEventListener('load', function(event) {
+	   		mylog("Document load done");
+	  		mylog("Print Javascript-bridges available");
+	  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
+	    	if(typeof window.WeixinJSContext !== 'undefined') mylog('WeixinJSContext');
+	    	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
+	    	if(typeof window.webSearchJSApi !== 'undefined') mylog('webSearchJSApi');
+	    	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
+	    	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('CustomFullscreenApi');
+	    	if(typeof window.__wx !== 'undefined') {
+	    		__Mywx = window.__wx;
+	    		mylog('__wx');
+	    	}
+	    	mylog("Print Javascript-bridges End");
+	    
+	     	if( typeof __wx !== 'undefined' ) { 	     		
+  				setTimeout(()=> {	
+  					startRecord();
+  				}, 5000);
+  			} else {
+  				mylog("__wx undefined, ERROR");
+  			}
+	    });	    
+  </script>
+</body>
+</html>
