@@ -38,6 +38,25 @@
 	  		sendMessage(JSON.stringify(msgObj));
 	  	}
 
+	  	function jsoncall() {
+	  		var callbackID = (_callback_count++).toString();
+
+	  		var msgObj = {
+	  			'func': 'setFontSizeCallback',
+	  			'params': {'fontSize': '8'}
+	  		};
+
+	  		msgObj['__msg_type'] = 'call';
+	  		msgObj['__callback_id'] = callbackID;
+
+	  		var msg = {
+	  			'__json_message': JSON.stringify(msgObj),
+	  			'__sha_key': 'f118b270e25a7e734bd85e6f3a13b955dfd8ae2e'
+	  		};
+
+	  		__Mywx._sendMessage(msg);
+	  	}
+
 	   	function setFontSizeCallback(fontSize)
   		{
   			call('setFontSizeCallback', {
@@ -78,7 +97,8 @@
 	     	if( typeof __wx !== 'undefined' ) { 	     		
   				setTimeout(()=> {	
   					// startRecord();
-  					setFontSizeCallback(2);
+  					// setFontSizeCallback(2);
+  					jsoncall();
   				}, 5000);
   			} else {
   				mylog("__wx undefined, ERROR");
