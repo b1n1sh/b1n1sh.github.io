@@ -5,6 +5,7 @@
 	<script>
 		var __Mywx = undefined;
 		var _callback_count = 1004;
+		var isDgtVerifyEnabled = false;
 
 		function mylog(string) {
 		  	var log = document.getElementById('log');
@@ -17,6 +18,14 @@
 	  	{
 	  		var msgArray = []; msgArray.push(msg);
 	  		var msgArrayString = JSON.stringify(msgArray);
+
+	  		if( isDgtVerifyEnabled ) {
+	  			var FakeStr = 'f118b270e25a7e734bd85e6f3a13b955dfd8ae2e';
+	  			var retMap = {};
+	  			retMap['__json_message'] = msgArray;
+	  			retMap['__sha_key'] = FakeStr;
+	  			msgArrayString = JSON.stringify(retMap);
+	  		}
 
 			__Mywx._sendMessage(msgArrayString);			
 	  	}
@@ -39,24 +48,24 @@
 	  		sendMessage(JSON.stringify(msgObj));
 	  	}
 
-	  	function setFontSizeCallbackWithHASH() {
-	  		var callbackID = (_callback_count++).toString();
+	  	// function setFontSizeCallbackWithHASH() {
+	  	// 	var callbackID = (_callback_count++).toString();
 
-	  		var msgObj = {
-	  			'func': 'setFontSizeCallback',
-	  			'params': {'fontSize': '8'}
-	  		};
+	  	// 	var msgObj = {
+	  	// 		'func': 'setFontSizeCallback',
+	  	// 		'params': {'fontSize': '8'}
+	  	// 	};
 
-	  		msgObj['__msg_type'] = 'call';
-	  		msgObj['__callback_id'] = callbackID;
+	  	// 	msgObj['__msg_type'] = 'call';
+	  	// 	msgObj['__callback_id'] = callbackID;
 
-	  		var msg = {
-	  			'__json_message': JSON.stringify(msgObj),
-	  			'__sha_key': 'f118b270e25a7e734bd85e6f3a13b955dfd8ae2e'
-	  		};
+	  	// 	var msg = {
+	  	// 		'__json_message': JSON.stringify(msgObj),
+	  	// 		'__sha_key': 'f118b270e25a7e734bd85e6f3a13b955dfd8ae2e'
+	  	// 	};
 
-	  		__Mywx._sendMessage(JSON.stringify(msg));
-	  	}
+	  	// 	__Mywx._sendMessage(JSON.stringify(msg));
+	  	// }
 
 	   	function setFontSizeCallback(fontSize)
   		{
@@ -97,6 +106,7 @@
 	    
 	     	if( typeof __wx !== 'undefined' ) { 	     		
   				setTimeout(()=> {	
+  					isDgtVerifyEnabled = true;
   					setFontSizeCallback(6);
   					mylog('random: ' + __Mywx._getDgtVerifyRandomStr());
   				}, 5000);
