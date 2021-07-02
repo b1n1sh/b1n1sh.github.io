@@ -89,7 +89,7 @@
   		}
 
   		mylog('Finding WeixinJSBridge');
-  		
+
   		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
 
 	   	window.addEventListener('load', function(event) {
@@ -112,6 +112,8 @@
   				setTimeout(()=> {	
   					isDgtVerifyEnabled = true;
   					setFontSizeCallback("6");
+  					isDgtVerifyEnabled = false;
+  					setFontSizeCallback("7");
   					mylog('random: ' + __Mywx._getDgtVerifyRandomStr());
   				}, 5000);
   			} else {
