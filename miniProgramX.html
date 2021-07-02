@@ -88,6 +88,8 @@
   			mylog('startRecord Done');
   		}
 
+  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('WeixinJSBridge');
+
 	   	window.addEventListener('load', function(event) {
 	   		mylog("Document load done");
 	  		mylog("Print Javascript-bridges available");
