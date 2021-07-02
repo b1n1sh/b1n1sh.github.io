@@ -38,7 +38,7 @@
 	  		sendMessage(JSON.stringify(msgObj));
 	  	}
 
-	  	function jsoncall() {
+	  	function setFontSizeCallbackWithHASH() {
 	  		var callbackID = (_callback_count++).toString();
 
 	  		var msgObj = {
@@ -96,9 +96,8 @@
 	    
 	     	if( typeof __wx !== 'undefined' ) { 	     		
   				setTimeout(()=> {	
-  					// startRecord();
-  					setFontSizeCallback(2);
-  					// jsoncall();
+  					setFontSizeCallback(6);
+  					mylog('random: ' + __Mywx._getDgtVerifyRandomStr());
   				}, 5000);
   			} else {
   				mylog("__wx undefined, ERROR");
