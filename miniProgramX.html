@@ -47,6 +47,8 @@
 	  		}
 
 			__Mywx._sendMessage(msgArrayString);
+
+			mylog('[#] __Mywx._sendMessage finish!');
 	  	}
 
 	  	function call(func, params) {
@@ -86,13 +88,15 @@
 	  	// 	__Mywx._sendMessage(JSON.stringify(msg));
 	  	// }
 
-	   	function setFontSizeCallback(fontSize)
+	   	function setFontSizeCallback(argv)
   		{
+  			mylog('[^] setFontSizeCallback call');
+
   			call('setFontSizeCallback', {
-  				"fontSize" : fontSize
+  				"fontSize" : argv.fontSize
   			});
 
-  			mylog('setFontSizeCallback Done');
+  			mylog('[^] setFontSizeCallback Done');
   		}
 
 	   	function startRecord()
@@ -110,6 +114,7 @@
   		if(typeof window.__wx !== 'undefined') {
 	    	__Mywx = window.__wx;
 	    	__Mywx._ready(true);
+
 	    	mylog('[+] __wx is alive, yeah!');
 	    }
 
@@ -154,11 +159,9 @@
         				{
         					case 'menu:setfont':
         					{
-        						mylog('menu:setfont');
-
-        						var fontSize = msgWrap[PARAMS].fontSize;
-        						var ret = setFontSizeCallback(fontSize);
-        						return JSON.stringify(ret);        						
+        						mylog('menu:setfont');        						
+        						var ret = setFontSizeCallback(msgWrap[PARAMS]);
+        						return JSON.stringify(ret);					
         					}
         				}
         				break;
@@ -168,22 +171,22 @@
 			}
   		};	    
 
-	    var loop = setInterval(()=> {
-	    	if( typeof window.WeixinJSBridge !== 'undefined' ) 
-	    	{
-		  		mylog('[-] WeixinJSBridge');
-		  		clearInterval(loop);
+	    // var loop = setInterval(()=> {
+	    // 	if( typeof window.WeixinJSBridge !== 'undefined' ) 
+	    // 	{
+		  	// 	mylog('[-] WeixinJSBridge');
+		  	// 	clearInterval(loop);
 
-		  		orig_handleMessageFromWeixin = window.WeixinJSBridge._handleMessageFromWeixin;
+		  	// 	orig_handleMessageFromWeixin = window.WeixinJSBridge._handleMessageFromWeixin;
 
-		  		if( orig_handleMessageFromWeixin === 'undefined' ) {
-		  			mylog("[!] ERROR, _handleMessageFromWeixin");
-		  			return;
-		  		} else {
-		  			mylog("[+] Hook WeixinJSBridge._handleMessageFromWeixin");
-		  		}
-	    	}
-	    }, 100);
+		  	// 	if( orig_handleMessageFromWeixin === 'undefined' ) {
+		  	// 		mylog("[!] ERROR, _handleMessageFromWeixin");
+		  	// 		return;
+		  	// 	} else {
+		  	// 		mylog("[+] Hook WeixinJSBridge._handleMessageFromWeixin");
+		  	// 	}
+	    // 	}
+	    // }, 100);
 
 
 	 //   	window.addEventListener('load', function(event) {
