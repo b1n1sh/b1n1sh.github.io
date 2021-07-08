@@ -7,6 +7,9 @@
 		var _callback_count = 1004;
 		var isDgtVerifyEnabled = false;
 		var orig_handleMessageFromWeixin = undefined;
+		const EVENT_ID = '__event_id';
+		const SHA_KEY = '__sha_key';
+		var randomStr = undefined;
 
 		function mylog(string) {
 		  	var log = document.getElementById('log');
@@ -104,6 +107,13 @@
 		  			orig_handleMessageFromWeixin = window.WeixinJSBridge._handleMessageFromWeixin;
         			window.WeixinJSBridge._handleMessageFromWeixin = function (msg) {
             			mylog("[-] Hook window.WeixinJSBridge._handleMessageFromWeixin");
+
+            			// save randomStr
+            			if( msg[EVENT_ID] == 'sys:updateRandomStr' ) {
+            				randomStr = msg['randomStr'];
+            				mylog("[*] updateRandomStr: "+randomStr);
+            			}
+
             			return orig_handleMessageFromWeixin(msg);
         			}
 		  		}
