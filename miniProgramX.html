@@ -1,11 +1,12 @@
 <html>
 <body>	
 	<pre id='log'></pre>
-	<h1>HAHA</h1>
+	<h1>Wait 5sec for doing something good...</h1>
 	<script>
 		var __Mywx = undefined;
 		var _callback_count = 1004;
 		var isDgtVerifyEnabled = false;
+		var orig_handleMessageFromWeixin = undefined;
 
 		function mylog(string) {
 		  	var log = document.getElementById('log');
@@ -98,7 +99,15 @@
 			setTimeout(()=> {	
 				mylog("[+] Document load done");
 		  		mylog("[+] Print Javascript-bridges available");
-		  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('[-] WeixinJSBridge');
+		  		if(typeof window.WeixinJSBridge !== 'undefined') {
+		  			mylog('[-] WeixinJSBridge');
+		  			orig_handleMessageFromWeixin = window.WeixinJSBridge._handleMessageFromWeixin;
+        			window.WeixinJSBridge._handleMessageFromWeixin = function (msg) {
+            			mylog("[-] Hook window.WeixinJSBridge._handleMessageFromWeixin");
+            			return orig_handleMessageFromWeixin(msg);
+        			}
+		  		}
+
 		    	if(typeof window.WeixinJSContext !== 'undefined') mylog('[-] WeixinJSContext');
 		    	if(typeof window.xwebToNative !== 'undefined') mylog('[-] xwebToNative');
 		    	if(typeof window.webSearchJSApi !== 'undefined') mylog('[-] webSearchJSApi');
