@@ -98,41 +98,56 @@
 	    	mylog('[+] __wx is alive, yeah!');
 	    }
 
-	   	window.addEventListener('load', function(event) {
-			setTimeout(()=> {	
-				mylog("[+] Document load done");
-		  		mylog("[+] Print Javascript-bridges available");
-		  		if(typeof window.WeixinJSBridge !== 'undefined') {
-		  			mylog('[-] WeixinJSBridge');
-		  			orig_handleMessageFromWeixin = window.WeixinJSBridge._handleMessageFromWeixin;
-        			window.WeixinJSBridge._handleMessageFromWeixin = function (msg) {
-            			mylog("[-] Hook window.WeixinJSBridge._handleMessageFromWeixin");
+	    setInterval(()=> {
+	    	if( typeof window.WeixinJSBridge !== 'undefined' ) 
+	    	{
+		  		mylog('[-] WeixinJSBridge');
+		  		clearInterval(this);
 
-            			// save randomStr
-            			if( msg[EVENT_ID] == 'sys:updateRandomStr' ) {
-            				randomStr = msg['randomStr'];
-            				mylog("[*] updateRandomStr: "+randomStr);
-            			}
+		  		orig_handleMessageFromWeixin = window.WeixinJSBridge._handleMessageFromWeixin;
+
+		  		if( orig_handleMessageFromWeixin === 'undefined' ) {
+		  			mylog("[!] ERROR, _handleMessageFromWeixin");
+		  			return;
+		  		}
+
+        		window.WeixinJSBridge = {
+        			_handleMessageFromWeixin : function (msg) {
+	            		mylog("[-] Hook window.WeixinJSBridge._handleMessageFromWeixin");
+
+	            		// save randomStr
+	            		if( msg[EVENT_ID] == 'sys:updateRandomStr' ) {
+	            			randomStr = msg['randomStr'];
+	            			mylog("[*] updateRandomStr: "+randomStr);
+	            		}
 
             			return orig_handleMessageFromWeixin(msg);
         			}
-		  		}
+		  		};
+	    	}
+	    }, 100);
 
-		    	if(typeof window.WeixinJSContext !== 'undefined') mylog('[-] WeixinJSContext');
-		    	if(typeof window.xwebToNative !== 'undefined') mylog('[-] xwebToNative');
-		    	if(typeof window.webSearchJSApi !== 'undefined') mylog('[-] webSearchJSApi');
-		    	if(typeof window.__wxtag !== 'undefined') mylog('[-] __wxtag');
-		    	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('[-] CustomFullscreenApi');
-		    	mylog("[+] Print Javascript-bridges End");
 
-				// isDgtVerifyEnabled = true;
-				// setFontSizeCallback("6");
-				// isDgtVerifyEnabled = false;
-				// setFontSizeCallback("7");
-				// mylog('random: ' + __Mywx._getDgtVerifyRandomStr());
-			}, 
-			5000);
-		});
+	 //   	window.addEventListener('load', function(event) {
+		// 	setTimeout(()=> {	
+		// 		mylog("[+] Document load done");
+		//   		mylog("[+] Print Javascript-bridges available");
+
+		//     	if(typeof window.WeixinJSContext !== 'undefined') mylog('[-] WeixinJSContext');
+		//     	if(typeof window.xwebToNative !== 'undefined') mylog('[-] xwebToNative');
+		//     	if(typeof window.webSearchJSApi !== 'undefined') mylog('[-] webSearchJSApi');
+		//     	if(typeof window.__wxtag !== 'undefined') mylog('[-] __wxtag');
+		//     	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('[-] CustomFullscreenApi');
+		//     	mylog("[+] Print Javascript-bridges End");
+
+		// 		// isDgtVerifyEnabled = true;
+		// 		// setFontSizeCallback("6");
+		// 		// isDgtVerifyEnabled = false;
+		// 		// setFontSizeCallback("7");
+		// 		// mylog('random: ' + __Mywx._getDgtVerifyRandomStr());
+		// 	}, 
+		// 	5000);
+		// });
   </script>
 </body>
 </html>
