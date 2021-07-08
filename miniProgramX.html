@@ -115,15 +115,17 @@
         			return "{}";
         		}
 
-        		var arr = new Array;
-      			arr[0] = JSON.stringify(realMessage);
-      			arr[1] = randomStr;
-      			var str = arr.join("");
-      			var msgSha = '';
-      			var shaObj = CryptoJS.SHA1(str);
-      			msgSha = shaObj.toString();
+        		if( realMessage !== 'undefined' ) {
+        			var arr = new Array;
+	      			arr[0] = JSON.stringify(realMessage);
+	      			arr[1] = randomStr;
+	      			var str = arr.join("");
+	      			var msgSha = '';
+	      			var shaObj = Crypto.SHA1(str);
+	      			msgSha = shaObj.toString();
 
-      			mylog("[?] SHA1 : " + msgSha);
+	      			mylog("[?] SHA1 : " + msgSha);
+        		}
 
     			// return orig_handleMessageFromWeixin(msg);
 			}
