@@ -98,11 +98,11 @@
 	    	mylog('[+] __wx is alive, yeah!');
 	    }
 
-	    setInterval(()=> {
+	    var loop = setInterval(()=> {
 	    	if( typeof window.WeixinJSBridge !== 'undefined' ) 
 	    	{
 		  		mylog('[-] WeixinJSBridge');
-		  		clearInterval(this);
+		  		clearInterval(loop);
 
 		  		orig_handleMessageFromWeixin = window.WeixinJSBridge._handleMessageFromWeixin;
 
