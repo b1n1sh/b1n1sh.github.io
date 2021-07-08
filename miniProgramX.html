@@ -10,6 +10,7 @@
 		const EVENT_ID = '__event_id';
 		const SHA_KEY = '__sha_key';
 		var randomStr = undefined;
+		var JSON_MESSAGE = '__json_message';
 
 		function mylog(string) {
 		  	var log = document.getElementById('log');
@@ -103,8 +104,9 @@
         		mylog("[-] Call Hooked WeixinJSBridge._handleMessageFromWeixin");
 
         		// save randomStr
-        		if( msg[EVENT_ID] == 'sys:updateRandomStr' ) {
-        			randomStr = msg['randomStr'];
+        		var realMessage = msg[JSON_MESSAGE];
+        		if( realMessage !== 'undefined' && realMessage[EVENT_ID] == 'sys:updateRandomStr' ) {
+        			randomStr = realMessage['randomStr'];
         			mylog("[*] updateRandomStr: "+randomStr);
         		}
 
