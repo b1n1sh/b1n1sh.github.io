@@ -83,7 +83,7 @@
   			mylog('[^] setFontSizeCallback call, fontSize: ' + argv.fontSize);
 
   			call('setFontSizeCallback', {
-  				"fontSize" : argv.fontSize
+  				"fontSize" : "8"
   			});
 
   			mylog('[^] setFontSizeCallback Done');
@@ -151,7 +151,7 @@
         					{
         						mylog('menu:setfont');        						
         						var ret = setFontSizeCallback(msgWrap[PARAMS]);
-        						return JSON.stringify(ret);					
+        						return JSON.stringify(ret);		
         					}
         				}
         				break;
