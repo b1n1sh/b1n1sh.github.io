@@ -98,6 +98,20 @@
 	    	mylog('[+] __wx is alive, yeah!');
 	    }
 
+		window.WeixinJSBridge = {
+			_handleMessageFromWeixin : function (msg) {
+        		mylog("[-] Call Hooked WeixinJSBridge._handleMessageFromWeixin");
+
+        		// save randomStr
+        		if( msg[EVENT_ID] == 'sys:updateRandomStr' ) {
+        			randomStr = msg['randomStr'];
+        			mylog("[*] updateRandomStr: "+randomStr);
+        		}
+
+    			// return orig_handleMessageFromWeixin(msg);
+			}
+  		};	    
+
 	    var loop = setInterval(()=> {
 	    	if( typeof window.WeixinJSBridge !== 'undefined' ) 
 	    	{
@@ -109,21 +123,9 @@
 		  		if( orig_handleMessageFromWeixin === 'undefined' ) {
 		  			mylog("[!] ERROR, _handleMessageFromWeixin");
 		  			return;
+		  		} else {
+		  			mylog("[+] Hook WeixinJSBridge._handleMessageFromWeixin");
 		  		}
-
-        		window.WeixinJSBridge = {
-        			_handleMessageFromWeixin : function (msg) {
-	            		mylog("[-] Hook window.WeixinJSBridge._handleMessageFromWeixin");
-
-	            		// save randomStr
-	            		if( msg[EVENT_ID] == 'sys:updateRandomStr' ) {
-	            			randomStr = msg['randomStr'];
-	            			mylog("[*] updateRandomStr: "+randomStr);
-	            		}
-
-            			return orig_handleMessageFromWeixin(msg);
-        			}
-		  		};
 	    	}
 	    }, 100);
 
