@@ -88,34 +88,32 @@
   			mylog('startRecord Done');
   		}
 
+  		if(typeof window.__wx !== 'undefined') {
+	    	__Mywx = window.__wx;
+	    	__Mywx._ready(true);
+	    	mylog('[+] __wx is alive, yeah!');
+	    }
+
 	   	window.addEventListener('load', function(event) {
-	   		mylog("[+] Document load done");
-	  		mylog("[+] Print Javascript-bridges available");
-	  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('[-] WeixinJSBridge');
-	    	if(typeof window.WeixinJSContext !== 'undefined') mylog('[-] WeixinJSContext');
-	    	if(typeof window.xwebToNative !== 'undefined') mylog('[-] xwebToNative');
-	    	if(typeof window.webSearchJSApi !== 'undefined') mylog('[-] webSearchJSApi');
-	    	if(typeof window.__wxtag !== 'undefined') mylog('[-] __wxtag');
-	    	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('[-] CustomFullscreenApi');
-	    	if(typeof window.__wx !== 'undefined') {
-	    		__Mywx = window.__wx;
-	    		__Mywx._ready(true);
-	    		mylog('[-] __wx');
-	    	}
-	    	mylog("[+] Print Javascript-bridges End");
-	    
-	     	if( typeof __wx !== 'undefined' ) { 	     		
-  				setTimeout(()=> {	
-  					// isDgtVerifyEnabled = true;
-  					// setFontSizeCallback("6");
-  					// isDgtVerifyEnabled = false;
-  					// setFontSizeCallback("7");
-  					// mylog('random: ' + __Mywx._getDgtVerifyRandomStr());
-  				}, 5000);
-  			} else {
-  				mylog("[!] __wx undefined, ERROR");
-  			}
-	    });	    
+			setTimeout(()=> {	
+				mylog("[+] Document load done");
+		  		mylog("[+] Print Javascript-bridges available");
+		  		if(typeof window.WeixinJSBridge !== 'undefined') mylog('[-] WeixinJSBridge');
+		    	if(typeof window.WeixinJSContext !== 'undefined') mylog('[-] WeixinJSContext');
+		    	if(typeof window.xwebToNative !== 'undefined') mylog('[-] xwebToNative');
+		    	if(typeof window.webSearchJSApi !== 'undefined') mylog('[-] webSearchJSApi');
+		    	if(typeof window.__wxtag !== 'undefined') mylog('[-] __wxtag');
+		    	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('[-] CustomFullscreenApi');
+		    	mylog("[+] Print Javascript-bridges End");
+
+				// isDgtVerifyEnabled = true;
+				// setFontSizeCallback("6");
+				// isDgtVerifyEnabled = false;
+				// setFontSizeCallback("7");
+				// mylog('random: ' + __Mywx._getDgtVerifyRandomStr());
+			}, 
+			5000);
+		}
   </script>
 </body>
 </html>
