@@ -27,10 +27,13 @@
 
 		function sendMessage(msg)
 	  	{
+	  		mylog('sendMessage gogo');
+
 	  		var msgArray = []; msgArray.push(msg);
 	  		var msgArrayString = JSON.stringify(msgArray);
 
-	  		if( isDgtVerifyEnabled ) {
+	  		if( isDgtVerifyEnabled )
+	  		{
 	  			var arr = new Array;
 			    arr[0] = msgArrayString;
 			    arr[1] = _xxyy;
@@ -66,31 +69,18 @@
 	  		msgObj['__msg_type'] = 'call';
 	  		msgObj['__callback_id'] = callbackID;
 
+	  		if( __Mywx === 'undefined' )
+	  		{
+	  			mylog("[!] __Mywx is nullptr, shit!");
+	  			return;
+	  		}
+
 	  		sendMessage(JSON.stringify(msgObj));
 	  	}
 
-	  	// function setFontSizeCallbackWithHASH() {
-	  	// 	var callbackID = (_callback_count++).toString();
-
-	  	// 	var msgObj = {
-	  	// 		'func': 'setFontSizeCallback',
-	  	// 		'params': {'fontSize': '8'}
-	  	// 	};
-
-	  	// 	msgObj['__msg_type'] = 'call';
-	  	// 	msgObj['__callback_id'] = callbackID;
-
-	  	// 	var msg = {
-	  	// 		'__json_message': JSON.stringify(msgObj),
-	  	// 		'__sha_key': 'f118b270e25a7e734bd85e6f3a13b955dfd8ae2e'
-	  	// 	};
-
-	  	// 	__Mywx._sendMessage(JSON.stringify(msg));
-	  	// }
-
 	   	function setFontSizeCallback(argv)
   		{
-  			mylog('[^] setFontSizeCallback call');
+  			mylog('[^] setFontSizeCallback call, fontSize: ' + argv.fontSize);
 
   			call('setFontSizeCallback', {
   				"fontSize" : argv.fontSize
@@ -99,17 +89,17 @@
   			mylog('[^] setFontSizeCallback Done');
   		}
 
-	   	function startRecord()
-  		{
-  			var data = {
-  				"appId" : "",
-  				"duration" : 5
-  			};
+	   // 	function startRecord()
+  		// {
+  		// 	var data = {
+  		// 		"appId" : "",
+  		// 		"duration" : 5
+  		// 	};
 
-  			call('startRecord', data);
+  		// 	call('startRecord', data);
 
-  			mylog('startRecord Done');
-  		}
+  		// 	mylog('startRecord Done');
+  		// }
 
   		if(typeof window.__wx !== 'undefined') {
 	    	__Mywx = window.__wx;
