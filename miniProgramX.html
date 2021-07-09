@@ -182,7 +182,8 @@
 	   	window.addEventListener('load', function(event) {
 	   		for(var i=1; i<8; i++) {
 	   			setTimeout(()=> {
-	   				setFontSizeCallback(i.toString);
+	   				var x = {"fontSize":i.toString()};
+	   				setFontSizeCallback(x);
 	   			}, 3000);
 	   		}
 		});
