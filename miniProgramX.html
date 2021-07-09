@@ -177,14 +177,12 @@
 		  	// 	}
 	    // 	}
 	    // }, 100);
-
-
+	    
 	   	window.addEventListener('load', function(event) {
-	   		for(var i=1; i<8; i++) {
+	   		for(var i=1; i<9; ++i) 
+	   		{
 	   			var x = {"fontSize":i.toString()};
-	   			setTimeout(()=> {	   				
-	   				setFontSizeCallback(x);
-	   			}, 5000);
+	   			setFontSizeCallback(x);
 	   		}
 		});
   </script>
