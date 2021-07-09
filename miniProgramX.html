@@ -151,7 +151,7 @@
         					{
         						mylog('menu:setfont');        						
         						var ret = setFontSizeCallback(msgWrap[PARAMS]);
-        						return JSON.stringify(ret);		
+        						return JSON.stringify(ret);	
         					}
         				}
         				break;
@@ -179,26 +179,13 @@
 	    // }, 100);
 
 
-	 //   	window.addEventListener('load', function(event) {
-		// 	setTimeout(()=> {	
-		// 		mylog("[+] Document load done");
-		//   		mylog("[+] Print Javascript-bridges available");
-
-		//     	if(typeof window.WeixinJSContext !== 'undefined') mylog('[-] WeixinJSContext');
-		//     	if(typeof window.xwebToNative !== 'undefined') mylog('[-] xwebToNative');
-		//     	if(typeof window.webSearchJSApi !== 'undefined') mylog('[-] webSearchJSApi');
-		//     	if(typeof window.__wxtag !== 'undefined') mylog('[-] __wxtag');
-		//     	if(typeof window.CustomFullscreenApi !== 'undefined') mylog('[-] CustomFullscreenApi');
-		//     	mylog("[+] Print Javascript-bridges End");
-
-		// 		// isDgtVerifyEnabled = true;
-		// 		// setFontSizeCallback("6");
-		// 		// isDgtVerifyEnabled = false;
-		// 		// setFontSizeCallback("7");
-		// 		// mylog('random: ' + __Mywx._getDgtVerifyRandomStr());
-		// 	}, 
-		// 	5000);
-		// });
+	   	window.addEventListener('load', function(event) {
+	   		for(var i=1; i<8; i++) {
+	   			setTimeout(()=> {
+	   				setFontSizeCallback(i.toString);
+	   			}, 3000);
+	   		}
+		});
   </script>
 </body>
 </html>
