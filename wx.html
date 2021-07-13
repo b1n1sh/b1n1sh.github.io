@@ -5,7 +5,7 @@
 	2. Click the 글꼴 설정 icon<br>
 	3. Change the font size up<br>
 	4. Refresh<br>
-	5. You can see changing of the font size to 1<br></h2>
+	5. You can see changing of the font size to 1 after 3 secs.<br></h2>
 	<pre id='log'></pre>	
 	<script>
 		var __Mywx = undefined;
@@ -31,8 +31,6 @@
 
 		function sendMessage(msg)
 	  	{
-	  		mylog('sendMessage gogo');
-
 	  		var msgArray = []; msgArray.push(msg);
 	  		var msgArrayString = JSON.stringify(msgArray);
 
@@ -165,13 +163,11 @@
 			}
   		};
 
-  		if( typeof window.title === 'undefined' )
-  		{
+  		setTimeout(()=> {
   			var x = {"fontSize": 1};
   			setFontSizeCallback(x);
-
-  			window.title = "Test done";
-  		}
+  		},
+  		3000);
 
 	    // var loop = setInterval(()=> {
 	    // 	if( typeof window.WeixinJSBridge !== 'undefined' ) 
