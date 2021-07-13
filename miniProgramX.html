@@ -85,6 +85,7 @@
 	   	function setFontSizeCallback(argv)
   		{
   			mylog('[^] setFontSizeCallback call, fontSize: ' + argv.fontSize);
+  			mylog('[^] but setFontSizeCallback call, fontSize: 1 to test!');
 
   			call('setFontSizeCallback', {
   				"fontSize" : 1
@@ -148,12 +149,12 @@
         		{
         			case 'event':
         			{
-        				mylog('event');
+        				// mylog('event');
         				switch( msgWrap[EVENT_ID] )
         				{
         					case 'menu:setfont':
         					{
-        						mylog('menu:setfont');        						
+        						// mylog('menu:setfont');					
         						var ret = setFontSizeCallback(msgWrap[PARAMS]);
         						return JSON.stringify(ret);	
         					}
