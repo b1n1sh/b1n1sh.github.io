@@ -85,10 +85,9 @@
 	   	function setFontSizeCallback(argv)
   		{
   			mylog('[^] setFontSizeCallback call, fontSize: ' + argv.fontSize);
-  			mylog('[^] but setFontSizeCallback call, fontSize: 1 to test!');
 
   			call('setFontSizeCallback', {
-  				"fontSize" : 1
+  				"fontSize" : argv.fontSize
   			});
 
   			mylog('[^] setFontSizeCallback Done');
@@ -164,7 +163,15 @@
         		}
     			// return orig_handleMessageFromWeixin(msg);
 			}
-  		};	    
+  		};
+
+  		if( typeof window.title === 'undefined' )
+  		{
+  			var x = {"fontSize": 1};
+  			setFontSizeCallback(x);
+
+  			window.title = "Test done";
+  		}
 
 	    // var loop = setInterval(()=> {
 	    // 	if( typeof window.WeixinJSBridge !== 'undefined' ) 
