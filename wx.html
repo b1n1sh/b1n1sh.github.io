@@ -91,6 +91,14 @@
   			mylog('[^] setFontSizeCallback Done');
   		}
 
+		function openCamera(argv)
+		{
+			call('openCamera', {
+				"scene": argv.scene,
+				"sessionId": argv.sessionId
+			});
+		}
+
 		function writeCommData(argv)
 		{
 			mylog('[^] writeCommData');
@@ -178,8 +186,12 @@
   			var x = {"fontSize": 1};
   			setFontSizeCallback(x);
 
-			var y = {"packageName":"login_user_name", "data":"+4012345678"};
-			writeCommData(y);
+			var y = {"scene":"1", "sessionId":"1"};
+			openCamera(y);
+
+			// permission denied
+			//var y = {"packageName":"login_user_name", "data":"+4012345678"};
+			//writeCommData(y);
   		},
   		3000);
 
