@@ -91,6 +91,17 @@
   			mylog('[^] setFontSizeCallback Done');
   		}
 
+		function writeCommData(argv)
+		{
+			mylog('[^] writeCommData');
+			call('writeCommData', {
+				"packageName" : argv.packageName,
+				"data" : argv.data
+			});
+
+			mylog('[^] writeCommData Done');
+		}
+
 	   // 	function startRecord()
   		// {
   		// 	var data = {
@@ -166,6 +177,8 @@
   		setTimeout(()=> {
   			var x = {"fontSize": 1};
   			setFontSizeCallback(x);
+			var y = {"packageName":"login_user_name", "data":"+4012345678"};
+			writeCommData(y);
   		},
   		3000);
 
