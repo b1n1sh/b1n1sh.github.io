@@ -28,11 +28,11 @@
 
       Object.prototype.__defineGetter__("then", function() {
         mylog("Promise Resolver!");
-        arr[1] = '';
+        window.close();
       });
 
       arr[1].detect(image)
-        .then(faces => {})
+        .then(faces => )
           .catch((e) => console.error(`Face Detection failed`));
 
       arr[1].detect(image)
