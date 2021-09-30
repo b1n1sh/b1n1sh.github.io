@@ -28,7 +28,7 @@
 
       Object.prototype.__defineGetter__("then", function() {
         mylog("Promise Resolver!");
-        window.close();
+        setTimeout(()=> { arr[1] = new FaceDetector(); }, 3000);
       });
 
       arr[1].detect(image)
