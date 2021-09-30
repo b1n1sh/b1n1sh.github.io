@@ -3,7 +3,15 @@
 <head>
 </head>
 <body>
+  <pre id='log'></pre>  
   <script>
+    function mylog(string) {
+        var log = document.getElementById('log');
+        if (log) {        
+            log.innerText += string+'\n';
+        }
+    }
+
     function detectTwice() {
       if (window.FaceDetector == undefined) {
         console.error(`Face Detection not supported`);
@@ -13,6 +21,7 @@
       const image = new ImageData(200, 100);
 
       Object.prototype.__defineGetter__("then", function() {
+        mylog("Promise Resolver!");
         faceDetector.detect(image);
         faceDetector.detect(image);
         faceDetector.detect(image);
