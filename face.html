@@ -43,6 +43,8 @@
         arr[1].detect(image)
         .then(faces => { mylog("second"); });
 
+      mylog("worker!");
+      
       var worker = new Worker('worker.js');
       worker.postMessage(arr[1]);
       worker.terminate();
