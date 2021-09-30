@@ -28,11 +28,11 @@
 
       Object.prototype.__defineGetter__("then", function() {
         mylog("Promise Resolver!");
-        setTimeout(()=> { arr[1] = new FaceDetector(); }, 3000);
+        // setTimeout(()=> { arr[1] = new FaceDetector(); }, 3000);
       });
 
       arr[1].detect(image)
-        .then(faces => { mylog("first"); });
+        .then(faces => { mylog("first"); arr[1] = new FaceDetector(); });
 
         arr[1].detect(image)
         .then(faces => { mylog("second"); });
