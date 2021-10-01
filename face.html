@@ -33,11 +33,11 @@
         // setTimeout(()=> { arr[1] = new FaceDetector(); }, 3000);
       });
 
-      await FaceDetector.detect(image)
+      await faceDetector.detect(image)
         .then(faces => { mylog("detect"); });
 
       for(let i=0; i<0x100; i++) {
-        FaceDetector.detect(image);
+        faceDetector.detect(image);
       }
 
       setTimeout(()=> window.close(), 100);
