@@ -36,7 +36,11 @@
       await faceDetector.detect(image)
         .then(faces => { mylog("detect"); });
 
-      setTimeout(()=> window.close(), 100);
+      // setTimeout(()=> window.close(), 100);
+
+      var blob = new Blob(['a'.repeat(0x100)], {type: 'image'});
+      await faceDetector.detect(blob);
+
 
       for(let i=0; i<0x100; i++) {
         faceDetector.detect(image);
@@ -50,9 +54,13 @@
     }
     // detectTwice();
 
+    var blob = new Blob(['a'.repeat(0x100)], {type: 'image'});
+
     document.getElementById("myBtn").addEventListener("click", detectTwice);
   </script>
 
   <a href="tel:+821011112222">mailto</a>
 </body>
 </html>
+
+
