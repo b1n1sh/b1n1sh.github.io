@@ -4,6 +4,7 @@
 </head>
 <body>
   <button id="myBtn" style="height: 200px;width: 200px">Go</button>
+  <button id="myBtn2" style="height: 200px;width: 200px">Bye</button>
   <pre id='log'></pre>  
   <script>
     function mylog(string) {
@@ -56,7 +57,16 @@
     // var blob = new Blob(['a'.repeat(0x100)], {type: 'image'});
 
     document.getElementById("myBtn").addEventListener("click", detectTwice);
+    document.getElementById("myBtn2").addEventListener("click", bye);
+
+    function bye() {
+      Object.defineProperty(window, 'FaceDetector', {
+        value: undefined
+      });
+    }
+
   </script>
+
 
   <a href="tel:+821011112222">mailto</a>
 </body>
