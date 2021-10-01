@@ -36,11 +36,11 @@
       await faceDetector.detect(image)
         .then(faces => { mylog("detect"); });
 
+      setTimeout(()=> window.close(), 100);
+
       for(let i=0; i<0x100; i++) {
         faceDetector.detect(image);
       }
-
-      setTimeout(()=> window.close(), 100);
 
       // mylog("worker!");
       // var worker = new Worker('worker.js');
