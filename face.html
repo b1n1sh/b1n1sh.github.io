@@ -38,9 +38,8 @@
 
       // setTimeout(()=> window.close(), 100);
 
-      var blob = new Blob(['a'.repeat(0x100)], {type: 'text/plain'});
-      await faceDetector.detect(blob);
-
+      //var blob = new Blob(['a'.repeat(0x100)], {type: 'text/plain'});
+      //await faceDetector.detect(blob);
 
       for(let i=0; i<0x100; i++) {
         faceDetector.detect(image);
@@ -54,7 +53,7 @@
     }
     // detectTwice();
 
-    var blob = new Blob(['a'.repeat(0x100)], {type: 'image'});
+    // var blob = new Blob(['a'.repeat(0x100)], {type: 'image'});
 
     document.getElementById("myBtn").addEventListener("click", detectTwice);
   </script>
