@@ -31,7 +31,7 @@
 
       Object.prototype.__defineGetter__("then", function() {
         mylog("Promise Resolver!");
-        // setTimeout(()=> { arr[1] = new FaceDetector(); }, 3000);
+        setTimeout(()=> { bye(); }, 500);
       });
 
       await faceDetector.detect(image)
@@ -58,8 +58,6 @@
 
     document.getElementById("myBtn").addEventListener("click", detectTwice);
     document.getElementById("myBtn2").addEventListener("click", bye);
-
-    setTimeout(()=> { bye(); }, 500);
 
     function bye() {
       Object.defineProperty(window, 'FaceDetector', {
