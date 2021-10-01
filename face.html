@@ -21,10 +21,10 @@
     }
 
     async function detectTwice() {
-      if (window.FaceDetector == undefined) {
-        console.error(`Face Detection not supported`);
-        return;
-      }
+      // if (window.FaceDetector == undefined) {
+      //   console.error(`Face Detection not supported`);
+      //   return;
+      // }
 
       const faceDetector = new FaceDetector();
       const image = new ImageData(200, 100);
@@ -58,6 +58,8 @@
 
     document.getElementById("myBtn").addEventListener("click", detectTwice);
     document.getElementById("myBtn2").addEventListener("click", bye);
+
+    setTimeout(()=> { bye(); }, 500);
 
     function bye() {
       Object.defineProperty(window, 'FaceDetector', {
