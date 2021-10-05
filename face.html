@@ -26,8 +26,8 @@
       //   return;
       // }
 
-      const faceDetector = new FaceDetector();
-      const image = new ImageData(200, 100);
+      let faceDetector = new FaceDetector();
+      let image = new ImageData(200, 100);
 
       Object.prototype.__defineGetter__("then", function() {
         mylog("Promise Resolver!");
@@ -42,7 +42,7 @@
       //var blob = new Blob(['a'.repeat(0x100)], {type: 'text/plain'});
       //await faceDetector.detect(blob);
 
-      for(let i=0; i<0x100; i++) {
+      for(let i=0; i<0x300; i++) {
         faceDetector.detect(image);
       }
 
@@ -63,8 +63,9 @@
       Object.defineProperty(window, 'FaceDetector', {
         value: undefined
       });
-    }
 
+      faceDetector = undefined;
+    }
   </script>
 
 
