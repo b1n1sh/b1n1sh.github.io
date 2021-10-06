@@ -4,7 +4,8 @@
     <script src="https://b1n1sh.github.io/FaceDetector/services/shape_detection/public/mojom/facedetection_provider.mojom.js"></script>
     </head>
     <body>
-      <button id="myBtn" style="height: 200px;width: 200px">Go</button>
+      <button id="myBtn" style="height: 200px;width: 200px">Trigger</button>
+      <button id="myBtn2" style="height: 200px;width: 200px">Go</button>
       <script>
       function FaceDetectionImpl() {
           this.binding = new mojo.Binding(shapeDetection.mojom.FaceDetection, this);
@@ -37,7 +38,15 @@
         Face_DetectionProviderPtr.createFaceDetection(Face_Detection, fdo);
       }     
 
+      function go()
+      {
+        let faceDetector = new FaceDetector();
+        let image = new ImageData(200, 100);
+        faceDetector.detect(image);
+      }
+
       document.getElementById("myBtn").addEventListener("click", trigger);
+      document.getElementById("myBtn2").addEventListener("click", go);
       </script>
     </body>
 </html>
