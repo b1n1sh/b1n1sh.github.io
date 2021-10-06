@@ -50,16 +50,18 @@
         for(let i=0; i<arr.length; i+=4) {
           arr[i+0] = 0;
           arr[i+1] = 190;
-          arr[i+2] = 0;
-          arr[i+3] = 255;
+          arr[i+2] = -1;
+          arr[i+3] = 512;
         }
 
-        arr[1000] = 512;
+        // arr[1000] = 512;
 
         let image = new ImageData(arr, 200);
 
         let faceDetector = new FaceDetector();  
         
+        faceDetector.detect(image);
+        faceDetector.detect(image);
         faceDetector.detect(image);
       }
 
