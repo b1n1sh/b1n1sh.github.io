@@ -1,9 +1,10 @@
 <html>
   <head>
-    <script src="/mojo_bindings.js"></script>
-    <script src="/services/shape_detection/public/mojom/facedetection.mojom.js"></script>
+    <script src="https://b1n1sh.github.io/FaceDetector/mojo_bindings.js"></script>
+    <script src="https://b1n1sh.github.io/FaceDetector/services/shape_detection/public/mojom/facedetection.mojom.js"></script>
     </head>
     <body>
+      <button id="myBtn" style="height: 200px;width: 200px">Go</button>
       <script>
       function trigger()
       {
@@ -11,7 +12,7 @@
         Mojo.bindInterface(shapeDetection.mojom.FaceDetection.name, mojo.makeRequest(Ptr).handle);
       }
 
-      trigger();
+      document.getElementById("myBtn").addEventListener("click", trigger);
       </script>
     </body>
 </html>
