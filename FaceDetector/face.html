@@ -1,15 +1,17 @@
 <html>
   <head>
-    <script src="https://b1n1sh.github.io/FaceDetector/mojo_bindings.js"></script>
-    <script src="https://b1n1sh.github.io/FaceDetector/services/shape_detection/public/mojom/facedetection.mojom.js"></script>
+    <script src="https://b1n1sh.github.io/FaceDetector/mojo_bindings.js"></script>    
+    <script src="https://b1n1sh.github.io/FaceDetector/services/shape_detection/public/mojom/facedetection_provider.mojom.js"></script>
     </head>
     <body>
       <button id="myBtn" style="height: 200px;width: 200px">Go</button>
       <script>
       function trigger()
       {
+        let PPtr = new shapeDetection.mojom.FaceDetectionProviderPtr();
+        Mojo.bindInterface(shapeDetection.mojom.FaceDetectionProvider.name, mojo.makeRequest(PPtr).handle);
+
         let Ptr = new shapeDetection.mojom.FaceDetectionPtr();
-        Mojo.bindInterface(shapeDetection.mojom.FaceDetection.name, mojo.makeRequest(Ptr).handle);
       }
 
       document.getElementById("myBtn").addEventListener("click", trigger);
