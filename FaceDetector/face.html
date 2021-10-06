@@ -38,7 +38,10 @@
 
         Face_DetectionProviderPtr.createFaceDetection(Face_Detection, fdo);
 
-        return Face_Detection;
+        let image = new ImageData(200, 100);
+        Face_Detection.detect(image);
+
+        // return Face_Detection;
       }     
 
       function go()
