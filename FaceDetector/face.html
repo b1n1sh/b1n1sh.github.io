@@ -6,13 +6,36 @@
     <body>
       <button id="myBtn" style="height: 200px;width: 200px">Go</button>
       <script>
+      function FaceDetectionImpl() {
+          this.binding = new mojo.Binding(shapeDetection.mojom.FaceDetection, this);
+      }
+
+      FaceDetectionImpl.prototype = {
+        detect: async (bitmap_data) => {
+          console.log("detect");
+        }
+      };
+
+      function createFaceDetection() {
+        Face_Detection = new FaceDetectionImpl();
+        Face_Detection_ptr = new shapeDetection.mojom.FaceDetectionPtr();
+        Face_Detection.binding.bind(mojo.makeRequest(Face_Detection_ptr));
+        return Face_Detection_ptr;
+      }
+
       function trigger()
       {
-        let PPtr = new shapeDetection.mojom.FaceDetectionProviderPtr();
-        Mojo.bindInterface(shapeDetection.mojom.FaceDetectionProvider.name, mojo.makeRequest(PPtr).handle);
+        let Face_DetectionProviderPtr = new shapeDetection.mojom.FaceDetectionProviderPtr();
+        Mojo.bindInterface(shapeDetection.mojom.FaceDetectionProvider.name, mojo.makeRequest(Face_DetectionProviderPtr).handle);        
+        
+        let fdo = new shapeDetection.mojom.FaceDetectorOptions();
+        fdo.maxDetectedFaces = 0;
+        fdo.fastMode = false;
 
-        let Ptr = new shapeDetection.mojom.FaceDetectionPtr();
-      }
+        let Face_Detection = createFaceDetection();
+
+        Face_DetectionProviderPtr.createFaceDetection(Face_Detection, fdo);
+      }     
 
       document.getElementById("myBtn").addEventListener("click", trigger);
       </script>
