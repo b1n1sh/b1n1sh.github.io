@@ -28,7 +28,7 @@
       function trigger()
       {
         let TextDetectionPtr = new shapeDetection.mojom.TextDetectionPtr();
-        Mojo.bindInterface(shapeDetection.mojom.TextDetectionPtr.name, mojo.makeRequest(TextDetectionPtr).handle);        
+        Mojo.bindInterface(shapeDetection.mojom.TextDetection.name, mojo.makeRequest(TextDetectionPtr).handle);
         
         // let fdo = new shapeDetection.mojom.FaceDetectorOptions();
         // fdo.maxDetectedFaces = 5;
