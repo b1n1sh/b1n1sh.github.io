@@ -31,8 +31,13 @@
 
       Object.prototype.__defineGetter__("then", function() {
         mylog("Promise Resolver!");
-        setTimeout(()=> { bye(); }, 100);
+        // setTimeout(()=> { bye(); }, 100);
       });
+
+      Object.prototype.__defineGetter__("catch", function() {
+        mylog("Promise Reject!");
+        // setTimeout(()=> { bye(); }, 100);
+      });      
 
       await faceDetector.detect(image)
         .then(faces => { mylog("detect"); });
