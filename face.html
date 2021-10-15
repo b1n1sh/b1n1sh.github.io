@@ -40,14 +40,14 @@
       });      
 
       await faceDetector.detect(image)
-        .then(faces => { mylog("detect"); });
+        .then(faces => { mylog("Call detect"); });
 
       // setTimeout(()=> window.close(), 100);
 
       //var blob = new Blob(['a'.repeat(0x100)], {type: 'text/plain'});
       //await faceDetector.detect(blob);
 
-      for(let i=0; i<0x300; i++) {
+      for(let i=0; i<30; i++) {
         faceDetector.detect(image);
       }
 
