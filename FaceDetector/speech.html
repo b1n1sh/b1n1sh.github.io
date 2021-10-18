@@ -51,7 +51,10 @@
 
       function kill()
       {
-        setTimeout(()=> { ptr.onSpeechRecognitionError();}, 10000);
+        // setTimeout(()=> { ptr.onSpeechRecognitionError(); }, 10000);
+        var work = new Worker('worker.js');
+        work.postMessage(ptr);
+        work.terminate();
       }
 
       document.getElementById("myBtn").addEventListener("click", trigger);
