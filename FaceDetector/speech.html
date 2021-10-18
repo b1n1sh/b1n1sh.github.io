@@ -34,7 +34,7 @@
       */
 
       function trigger()
-      {
+      {        
         let ptr = new media.mojom.SpeechRecognitionRecognizerClientPtr();
         Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(ptr).handle);
         mylog('media.mojom.SpeechRecognitionRecognizerClient 1');
@@ -44,7 +44,7 @@
 
         mylog('media.mojom.SpeechRecognitionRecognizerClient 2');
 
-        setTimeout(()=> { ptr.onSpeechRecognitionError();}, 6000);
+        setTimeout(()=> { ptr.onSpeechRecognitionError();}, 10000);
       }
 
       document.getElementById("myBtn").addEventListener("click", trigger);
