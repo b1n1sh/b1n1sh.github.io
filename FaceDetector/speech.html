@@ -6,6 +6,7 @@
     <body>
     <pre id='log'></pre>
       <button id="myBtn" style="height: 200px;width: 200px">Trigger</button>
+      <button id="myBtn2" style="height: 200px;width: 200px">Kill</button>
       <script>
       function mylog(string) {
           var log = document.getElementById('log');
@@ -33,21 +34,28 @@
       }
       */
 
+      let ptr;
+      let ptr2;
+
       function trigger()
       {        
-        let ptr = new media.mojom.SpeechRecognitionRecognizerClientPtr();
+        ptr = new media.mojom.SpeechRecognitionRecognizerClientPtr();
         Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(ptr).handle);
         mylog('media.mojom.SpeechRecognitionRecognizerClient 1');
 
-        let ptr2 = new media.mojom.SpeechRecognitionRecognizerClientPtr();
+        ptr2 = new media.mojom.SpeechRecognitionRecognizerClientPtr();
         Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(ptr2).handle);
 
-        mylog('media.mojom.SpeechRecognitionRecognizerClient 2');
+        mylog('media.mojom.SpeechRecognitionRecognizerClient 2');        
+      }
 
+      function kill()
+      {
         setTimeout(()=> { ptr.onSpeechRecognitionError();}, 10000);
       }
 
       document.getElementById("myBtn").addEventListener("click", trigger);
+      document.getElementById("myBtn2").addEventListener("click", kill);
       </script>
     </body>
 </html>
