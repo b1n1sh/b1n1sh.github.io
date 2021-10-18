@@ -43,7 +43,9 @@
         Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(ptr2).handle);
 
         mylog('media.mojom.SpeechRecognitionRecognizerClient 2');
-      }     
+
+        setTimeout(()=> { ptr.onSpeechRecognitionError();}, 6000);
+      }
 
       document.getElementById("myBtn").addEventListener("click", trigger);
       </script>
