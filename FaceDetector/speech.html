@@ -37,7 +37,12 @@
       {
         let ptr = new media.mojom.SpeechRecognitionRecognizerClientPtr();
         Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(ptr).handle);
-        mylog('media.mojom.SpeechRecognitionRecognizerClient');
+        mylog('media.mojom.SpeechRecognitionRecognizerClient 1');
+
+        let ptr2 = new media.mojom.SpeechRecognitionRecognizerClientPtr();
+        Mojo.bindInterface(media.mojom.SpeechRecognitionRecognizerClient.name, mojo.makeRequest(ptr2).handle);
+
+        mylog('media.mojom.SpeechRecognitionRecognizerClient 2');
       }     
 
       document.getElementById("myBtn").addEventListener("click", trigger);
