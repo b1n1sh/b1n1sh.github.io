@@ -62,7 +62,11 @@
     // var blob = new Blob(['a'.repeat(0x100)], {type: 'image'});
 
     document.getElementById("myBtn").addEventListener("click", detectTwice);
-    document.getElementById("myBtn2").addEventListener("click", bye);
+    document.getElementById("myBtn2").addEventListener("click", ttt);
+
+    function ttt() {
+      var x = window.open('https://www.naver.com');
+    }
 
     function bye() {
       Object.defineProperty(window, 'FaceDetector', {
@@ -75,6 +79,8 @@
 
 
   <a href="tel:+821011112222">mailto</a>
+  <a href="https://www.google.com">google.com</a>
+
 </body>
 </html>
 
