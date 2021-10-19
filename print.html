@@ -8,6 +8,7 @@
 
     function load() {
       setTimeout(print1, 3000);
+      setTimeout(()=>{ window.close(); }, 5000);
     }
   </script>
 <body onload="load()">
