@@ -7,8 +7,8 @@
       <script>
       function trigger()
       {
-        let Ptr = new mediaRouter.mojom.MediaRouterPtr();
-        Mojo.bindInterface(mediaRouter.mojom.MediaRouter.name, mojo.makeRequest(Ptr).handle);
+        let Ptr = new mediaRouter.mojom.MediaRouterProviderPtr();
+        Mojo.bindInterface(mediaRouter.mojom.MediaRouterProvider.name, mojo.makeRequest(Ptr).handle);
       }
 
       trigger();
