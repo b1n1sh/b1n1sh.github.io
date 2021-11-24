@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <script src="/Media/mojo_bindings.js"></script>
+    <script src="/Media/services/shape_detection/public/mojom/facedetection.mojom.js"></script>
+    </head>
+    <body>
+      <script>
+      function trigger()
+      {
+        let Ptr = new mediaRouter.mojom.MediaRouterPtr();
+        Mojo.bindInterface(mediaRouter.mojom.MediaRouter.name, mojo.makeRequest(Ptr).handle);
+      }
+
+      trigger();
+      </script>
+    </body>
+</html>
