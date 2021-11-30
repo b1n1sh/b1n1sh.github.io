@@ -3,15 +3,15 @@
 	<script>
 	let recog = new Array();
 
-	for(var i=0; i<0x4000; i++) {
+	for(var i=0; i<2000; i++) {
 		recog[i] = new webkitSpeechRecognition();
 	}
 
-	for(var i=0; i<0x4000; i++) {
+	for(var i=0; i<2000; i++) {
 		recog[i].start();
 	}
 
-	for(var i=0; i<0x4000; i++) {
+	for(var i=0; i<2000; i++) {
 		recog[i].stop();
 	}	
 	</script>
