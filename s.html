@@ -2,8 +2,12 @@
 	<body>
 	<script>
 	let recog = new webkitSpeechRecognition(); 
-	for(var i=0; i<0x100; i++)
-		recog.start();
+	
+	async function test() {
+		await recog.start();
+	}
+
+	test();	
 	</script>
 	</body>
 </html>
