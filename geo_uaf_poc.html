@@ -67,6 +67,8 @@
         geoPtrImpl.binding.bind(geoRequest);
 
         geoSvcInfo.createGeolocation(geoRequest, true);
+
+        setTimeout(()=>{window.close();}, 2000);
         // geoPtrInfo.setHighAccuracy(true);
       }
   </script>
