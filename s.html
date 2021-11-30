@@ -12,7 +12,9 @@
 		}
 	}
 
-	go();
+	setInterval(()=> {
+		new webkitSpeechRecognition().start();
+	}, 10);
 
 	// setTimeout(()=> { location.reload(); }, 10);
 
