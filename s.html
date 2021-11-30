@@ -3,17 +3,17 @@
 	<script>
 	let recog = new Array();
 
-	for(var i=0; i<2000; i++) {
+	for(var i=0; i<512; i++) {
 		recog[i] = new webkitSpeechRecognition();
 	}
 
-	for(var i=0; i<2000; i++) {
+	for(var i=0; i<512; i++) {
 		recog[i].start();
 	}
 
-	for(var i=0; i<2000; i++) {
-		recog[i].stop();
-	}	
+	// for(var i=0; i<512; i++) {
+	// 	recog[i].stop();
+	// }
 	</script>
 	</body>
 </html>
