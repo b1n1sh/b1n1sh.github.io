@@ -1,10 +1,16 @@
 <html>
 	<body>
 	<script>
-	let recog =  new webkitSpeechRecognition();
-	recog.start();
+	async function go() {
+		let recog = new Array();
+		for(var i=0; i<0x2000; i++)
+			recog[i] =  new webkitSpeechRecognition();
+		// recog.start();
+	}
 
-	setTimeout(()=> { location.reload(); }, 10);
+	go();
+
+	// setTimeout(()=> { location.reload(); }, 10);
 
 	// for(var i=0; i<512; i++) {
 	// 	recog[i].start();
