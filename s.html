@@ -1,13 +1,19 @@
 <html>
 	<body>
 	<script>
-	let recog = new webkitSpeechRecognition(); 
-	
-	async function test() {
-		await recog.start();
+	let recog = new Array();
+
+	for(var i=0 i<0x4000; i++) {
+		recog[i] = new webkitSpeechRecognition();
 	}
 
-	test();	
+	for(var i=0 i<0x4000; i++) {
+		recog[i].start();
+	}
+
+	for(var i=0 i<0x4000; i++) {
+		recog[i].stop();
+	}
 	</script>
 	</body>
 </html>
