@@ -3,13 +3,18 @@
 	<script>
 	let recog = new Array();
 
-	for(var i=0; i<512; i++) {
-		recog[i] = new webkitSpeechRecognition();
+	async function test() {
+		for(var i=0; i<512; i++) {
+			recog[i] = new webkitSpeechRecognition();
+			await recog[i].start();
+		}
 	}
 
-	for(var i=0; i<512; i++) {
-		recog[i].start();
-	}
+	test();
+
+	// for(var i=0; i<512; i++) {
+	// 	recog[i].start();
+	// }
 
 	// for(var i=0; i<512; i++) {
 	// 	recog[i].stop();
