@@ -110,6 +110,17 @@
 			mylog('[^] writeCommData Done');
 		}
 
+		function openSpecificView(argv)
+		{
+			call('openSpecificView', {
+				"specificview" : argv.specificview,
+				"webview_scene" : argv.webview_scene,
+				"url" : argv.url,
+				"extinfo" : argv.extinfo
+			});
+
+		}
+
 	   // 	function startRecord()
   		// {
   		// 	var data = {
@@ -170,7 +181,7 @@
         				{
         					case 'menu:setfont':
         					{
-        						// mylog('menu:setfont');					
+        						mylog('menu:setfont');
         						var ret = setFontSizeCallback(msgWrap[PARAMS]);
         						return JSON.stringify(ret);	
         					}
@@ -183,11 +194,14 @@
   		};
 
   		setTimeout(()=> {
-  			var x = {"fontSize": 1};
-  			setFontSizeCallback(x);
+  			// var x = {"fontSize": 1};
+  			// setFontSizeCallback(x);
 
-			var y = {"scene":"1", "sessionId":"1"};
-			openCamera(y);
+  			var y = {"specificview" : "weixin://openSpecificView/myprofile", "webview_scene" : 3, "url" : "https://www.google.com", "extinfo" : "extinfo"};
+  			openSpecificView(y);
+
+			// var y = {"scene":"1", "sessionId":"1"};
+			// openCamera(y);
 
 			// permission denied
 			//var y = {"packageName":"login_user_name", "data":"+4012345678"};
