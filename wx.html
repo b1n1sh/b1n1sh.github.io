@@ -91,6 +91,17 @@
   			mylog('[^] setFontSizeCallback Done');
   		}
 
+	   	function attach_runOn3rd_apis(argv)
+  		{
+  			mylog('[^] attach_runOn3rd_apis call, __runOn3rd_apis: ' + argv.__runOn3rd_apis);
+
+  			call('attach_runOn3rd_apis', {
+  				"__runOn3rd_apis" : argv.__runOn3rd_apis
+  			});
+
+  			mylog('[^] attach_runOn3rd_apis Done');
+  		}  		
+
 		function openCamera(argv)
 		{
 			call('openCamera', {
@@ -183,6 +194,11 @@
         					case 'menu:setfont':
         					{
         						var ret = setFontSizeCallback(msgWrap[PARAMS]);
+        						return JSON.stringify(ret);
+        					}
+        					case 'sys:attach_runOn3rd_apis':
+        					{
+        						var ret = attach_runOn3rd_apis(msgWrap[PARAMS]);
         						return JSON.stringify(ret);
         					}
         				}
