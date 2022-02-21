@@ -112,13 +112,14 @@
 
 		function openSpecificView(argv)
 		{
+			mylog('[^] openSpecificView');	
 			call('openSpecificView', {
 				"specificview" : argv.specificview,
 				"webview_scene" : argv.webview_scene,
 				"url" : argv.url,
 				"extinfo" : argv.extinfo
 			});
-
+			mylog('[^] openSpecificView Done');
 		}
 
 	   // 	function startRecord()
@@ -181,7 +182,6 @@
         				{
         					case 'menu:setfont':
         					{
-        						mylog('menu:setfont');
         						var ret = setFontSizeCallback(msgWrap[PARAMS]);
         						return JSON.stringify(ret);
         					}
