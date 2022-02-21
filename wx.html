@@ -176,14 +176,14 @@
         		{
         			case 'event':
         			{
-        				// mylog('event');
+        				mylog('Got event: ' + msgWrap[EVENT_ID]);
         				switch( msgWrap[EVENT_ID] )
         				{
         					case 'menu:setfont':
         					{
         						mylog('menu:setfont');
         						var ret = setFontSizeCallback(msgWrap[PARAMS]);
-        						return JSON.stringify(ret);	
+        						return JSON.stringify(ret);
         					}
         				}
         				break;
