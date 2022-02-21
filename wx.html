@@ -84,6 +84,7 @@
   		{
   			mylog('[^] setFontSizeCallback call, fontSize: ' + argv.fontSize);
 
+  			// first is function name
   			call('setFontSizeCallback', {
   				"fontSize" : argv.fontSize
   			});
@@ -100,7 +101,7 @@
   			});
 
   			mylog('[^] attach_runOn3rd_apis Done');
-  		}  		
+  		}
 
 		function openCamera(argv)
 		{
@@ -132,6 +133,18 @@
 			});
 			mylog('[^] openSpecificView Done');
 		}
+
+	   	function enableFullScreen(argv)
+  		{
+  			mylog('[^] enableFullScreen call, enable: ' + argv.enable);
+
+  			// first is function name
+  			call('enableFullScreen', {
+  				"enable" : argv.enable
+  			});
+
+  			mylog('[^] enableFullScreen Done');
+  		}		
 
 	   // 	function startRecord()
   		// {
@@ -213,8 +226,11 @@
   			var x = {"fontSize": 5};
   			setFontSizeCallback(x);
 
-  			var y = {"specificview" : "weixin://openSpecificView/myprofile", "webview_scene" : 3, "url" : "https://www.google.com", "extinfo" : "extinfo"};
-  			openSpecificView(y);
+  			// var y = {"specificview" : "weixin://openSpecificView/myprofile", "webview_scene" : 3, "url" : "https://www.google.com", "extinfo" : "extinfo"};
+  			// openSpecificView(y);
+
+  			var z = {"enable" : true};
+  			enableFullScreen(z);
 
 			// var y = {"scene":"1", "sessionId":"1"};
 			// openCamera(y);
