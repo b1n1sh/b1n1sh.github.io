@@ -155,10 +155,10 @@
   		{
   			mylog('[^] sendEmail call');
 
-  			// sendMessage(JSON.stringify({
-     //        	'__handleFromWeixin': randomStr,
-     //            '__fullApiName': 'sendEmail'
-     //        }));
+  			sendMessage(JSON.stringify({
+            	'__handleFromWeixin': randomStr,
+                '__fullApiName': 'sendEmail'
+            }));
 
   			// first is function name
   			call('sendEmail', argv);
