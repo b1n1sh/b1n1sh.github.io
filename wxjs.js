@@ -2220,7 +2220,7 @@
         {
           if (typeof msgWrap[_EVENT_ID] === 'string') {
             if (typeof _event_hook_map_for3rd[msgWrap[_EVENT_ID]] === 'function' && _isIn3rdApiList(msgWrap[_EVENT_ID])) {
-              alert("_isIn3rdApiList and 3rd");
+              alert("_isIn3rdApiList and 3rd, event_id: " + msgWrap[_EVENT_ID]);
               var shareEvents = ['menu:share:timeline', 'menu:share:qq', 'menu:share:weiboApp', 'menu:share:QZone', 'menu:share:appmessage', 'menu:share:email']
               if (shareEvents.indexOf(msgWrap[_EVENT_ID]) > -1) { // 判断是否分享事件，这里漏了要加上
                 // 自定义分享内容，申请分享权限
@@ -2232,7 +2232,7 @@
               var ret = _event_hook_map_for3rd[msgWrap[_EVENT_ID]](msgWrap['__params']);
               return JSON.stringify(ret);
             } else if (typeof _event_hook_map[msgWrap[_EVENT_ID]] === 'function') {
-              alert("_event_hook_map");
+              alert("_event_hook_map, event_id: " + msgWrap[_EVENT_ID]);
               var ret = _event_hook_map[msgWrap[_EVENT_ID]](msgWrap['__params']);
               return JSON.stringify(ret);
             }
