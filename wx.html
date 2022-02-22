@@ -147,9 +147,24 @@
   			call('enableFullScreen', {
   				"enable" : argv.enable
   			});
-  			
+
   			mylog('[^] enableFullScreen Done');
-  		}		
+  		}
+
+	   	function sendEmail(argv)
+  		{
+  			mylog('[^] sendEmail call');
+
+  			// sendMessage(JSON.stringify({
+     //        	'__handleFromWeixin': randomStr,
+     //            '__fullApiName': 'sendEmail'
+     //        }));
+
+  			// first is function name
+  			call('sendEmail', argv);
+  			
+  			mylog('[^] sendEmail Done');
+  		}		  		
 
 	   // 	function startRecord()
   		// {
@@ -231,6 +246,9 @@
 
   			var z = {"enable" : true};
   			enableFullScreen(z);
+
+  			var data = { "content": document.documentURI || _session_data.init_url, "title": "baboya" };
+  			sendEmail(data);
 
 			// var y = {"scene":"1", "sessionId":"1"};
 			// openCamera(y);
