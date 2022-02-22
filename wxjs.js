@@ -2327,6 +2327,7 @@
   }
 
   function _onfor3rd(event, callback) {
+    alert("onfor3rd");
     var curFuncIdentifier = __WeixinJSBridge.on;
     if (curFuncIdentifier !== _onfor3rdIdentifier) {
       return;
@@ -2924,9 +2925,11 @@
     _on('sys:attach_runOn3rd_apis', function (ses) {
       if (typeof ses[_RUN_ON_3RD_APIS] === 'object') {
         _runOn3rdApiList = ses[_RUN_ON_3RD_APIS]; // __runOn3rd_apis
-        alert('_runOn3rdApiList : ' + _runOn3rdApiList);
-        alert('ses : ' + ses);
-        alert('apis : ' + _runOn3rdApiList);
+        // _runOn3rdApiList => sys:record,onVoiceRecordEnd,....,onUserGoBack
+        // alert('_runOn3rdApiList : ' + _runOn3rdApiList);
+        // ses => object
+        // alert('ses : ' + ses);
+        // alert('apis : ' + _runOn3rdApiList);
       }
     });
 
