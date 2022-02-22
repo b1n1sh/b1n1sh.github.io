@@ -9,7 +9,7 @@
     __initLogArr.push(arguments);
     if (lvl >= __initLogLvl) {
         console && console.log.apply(console, Array.prototype.slice.call(arguments, 1));
-        document.getElementById('log').innerText += lvl+'\n';
+        document.getElementById('log').innerText += Array.prototype.slice.call(arguments, 1)+'\n';
     }
   }
 
