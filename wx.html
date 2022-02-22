@@ -138,11 +138,16 @@
   		{
   			mylog('[^] enableFullScreen call, enable: ' + argv.enable);
 
+  			sendMessage(JSON.stringify({
+            	'__handleFromWeixin': randomStr,
+                '__fullApiName': 'enableFullScreen'
+            }));
+
   			// first is function name
   			call('enableFullScreen', {
   				"enable" : argv.enable
   			});
-
+  			
   			mylog('[^] enableFullScreen Done');
   		}		
 
@@ -209,11 +214,6 @@
         						var ret = setFontSizeCallback(msgWrap[PARAMS]);
         						return JSON.stringify(ret);
         					}
-        					case 'sys:attach_runOn3rd_apis':
-        					{
-        						var ret = attach_runOn3rd_apis(msgWrap[PARAMS]);
-        						return JSON.stringify(ret);
-        					}
         				}
         				break;
         			}
@@ -229,7 +229,7 @@
   			// var y = {"specificview" : "weixin://openSpecificView/myprofile", "webview_scene" : 3, "url" : "https://www.google.com", "extinfo" : "extinfo"};
   			// openSpecificView(y);
 
-  			var z = {"enable" : "true"};
+  			var z = {"enable" : true};
   			enableFullScreen(z);
 
 			// var y = {"scene":"1", "sessionId":"1"};
