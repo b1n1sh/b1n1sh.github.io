@@ -1,12 +1,13 @@
 <html>
-<body>	
+<body>
+	<input type="button" id="target" valud="button!">
 	<h1>Please test 'setFontSizeCallback' as follows</h1>	
 	<h2>1. Click the right-top ... icon<br>
 	2. Click the 글꼴 설정 icon<br>
 	3. Change the font size up<br>
 	4. Refresh<br>
 	5. Font size will be 1 after 3 secs.<br></h2>
-	<pre id='log'></pre>	
+	<pre id='log'></pre>
 	<script>
 		var __Mywx = undefined;
 		var _callback_count = 1004;
@@ -250,32 +251,6 @@
     			// return orig_handleMessageFromWeixin(msg);
 			}
   		};
-
-  		setTimeout(()=> {
-  			var x = {"fontSize": 5};
-  			setFontSizeCallback(x);
-
-  			// var y = {"specificview" : "weixin://openSpecificView/myprofile", "webview_scene" : 3, "url" : "https://www.google.com", "extinfo" : "extinfo"};
-  			// openSpecificView(y);
-
-  			// var z = {"enable" : true};
-  			// enableFullScreen(z);
-
-  			var geo = {"type" : "gcj02"};
-  			geoLocation(geo);
-
-  			// var data = { "content": document.documentURI || _session_data.init_url, "title": "baboya" };
-  			// sendEmail(data);
-
-			// var y = {"scene":"1", "sessionId":"1"};
-			// openCamera(y);
-
-			// permission denied
-			//var y = {"packageName":"login_user_name", "data":"+4012345678"};
-			//writeCommData(y);
-  		},
-  		5000);
-
 	    // var loop = setInterval(()=> {
 	    // 	if( typeof window.WeixinJSBridge !== 'undefined' ) 
 	    // 	{
@@ -299,6 +274,35 @@
 	 //   			setFontSizeCallback(x);
 	 //   		}
 		// });
+  </script>
+  <script>
+  	var t = document.getElementById('target');
+  	t.addEventListener('click', function(event) {
+  		setTimeout(()=> {
+  			var x = {"fontSize": 5};
+  			setFontSizeCallback(x);
+
+  			// var y = {"specificview" : "weixin://openSpecificView/myprofile", "webview_scene" : 3, "url" : "https://www.google.com", "extinfo" : "extinfo"};
+  			// openSpecificView(y);
+
+  			// var z = {"enable" : true};
+  			// enableFullScreen(z);
+
+  			var geo = {"type" : "gcj02"};
+  			geoLocation(geo);
+
+  			// var data = { "content": document.documentURI || _session_data.init_url, "title": "baboya" };
+  			// sendEmail(data);
+
+			// var y = {"scene":"1", "sessionId":"1"};
+			// openCamera(y);
+
+			// permission denied
+			//var y = {"packageName":"login_user_name", "data":"+4012345678"};
+			//writeCommData(y);
+  		},
+  		3000);
+  	});
   </script>
 </body>
 </html>
