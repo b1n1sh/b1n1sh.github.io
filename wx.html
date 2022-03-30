@@ -276,9 +276,12 @@
 		// });
   </script>
   <script>
-	navigator.geolocation.getCurrentPosition((position) => {
-  		console.log(position.coords.latitude, position.coords.longitude);
-	});
+  	navigator.permissions.query({name:'geolocation'}).then(function(result) {
+  		console.log(result);
+  		navigator.geolocation.getCurrentPosition((position) => {
+  			console.log(position.coords.latitude, position.coords.longitude);
+		});
+  	});
 
   	var t = document.getElementById('target');
   	t.addEventListener('click', function(event) {
