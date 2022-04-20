@@ -1,0 +1,15 @@
+<html>
+  <body>
+    <script>
+        if (typeof Mojo !== "undefined") {
+            navigator.serviceWorker.register('./sw.js', {scope: './'}).then(
+            	function(r){
+             
+           	 }
+            )
+	} else {
+	   document.write("Mojo is disabled");
+	}
+    </script>
+  </body>
+</html>

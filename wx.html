@@ -251,40 +251,15 @@
     			// return orig_handleMessageFromWeixin(msg);
 			}
   		};
-	    // var loop = setInterval(()=> {
-	    // 	if( typeof window.WeixinJSBridge !== 'undefined' ) 
-	    // 	{
-		  	// 	mylog('[-] WeixinJSBridge');
-		  	// 	clearInterval(loop);
 
-		  	// 	orig_handleMessageFromWeixin = window.WeixinJSBridge._handleMessageFromWeixin;
-
-		  	// 	if( orig_handleMessageFromWeixin === 'undefined' ) {
-		  	// 		mylog("[!] ERROR, _handleMessageFromWeixin");
-		  	// 		return;
-		  	// 	} else {
-		  	// 		mylog("[+] Hook WeixinJSBridge._handleMessageFromWeixin");
-		  	// 	}
-	    // 	}
-	    // }, 100);
-
-	 //   	window.addEventListener('load', function(event) {
-	 //   		for(var i=1; i<9; i++) {
-	 //   			var x = {"fontSize":i.toString()};
-	 //   			setFontSizeCallback(x);
-	 //   		}
-		// });
-  </script>
-  <script>
-	navigator.geolocation.getCurrentPosition((position) => {
-		console.log(position.coords.latitude, position.coords.longitude);
-	}); 	
-
-  	var t = document.getElementById('target');
-  	t.addEventListener('click', function(event) {
   		setTimeout(()=> {
-  			var x = {"fontSize": 5};
-  			setFontSizeCallback(x);
+  			var blink = {};
+  			var mmsf0001 = call('mmsf0001', blink);
+  			mylog(mmsf0001);
+  			console.log(mmsf0001);
+
+  			// var x = {"fontSize": 5};
+  			// setFontSizeCallback(x);
 
   			// var y = {"specificview" : "weixin://openSpecificView/myprofile", "webview_scene" : 3, "url" : "https://www.google.com", "extinfo" : "extinfo"};
   			// openSpecificView(y);
@@ -292,8 +267,9 @@
   			// var z = {"enable" : true};
   			// enableFullScreen(z);
 
-  			var geo = {"type" : "gcj02"};
-  			geoLocation(geo);
+  			// var geo = {"type" : "gcj02"};
+  			// var geo = {"type" : "wgs84"};
+  			// geoLocation(geo);
 
   			// var data = { "content": document.documentURI || _session_data.init_url, "title": "baboya" };
   			// sendEmail(data);
@@ -306,7 +282,39 @@
 			//writeCommData(y);
   		},
   		3000);
-  	});
+  </script>
+  <script>
+	// navigator.geolocation.getCurrentPosition((position) => {
+	// 	console.log(position.coords.latitude, position.coords.longitude);
+	// }); 	
+
+ //  	var t = document.getElementById('target');
+ //  	t.addEventListener('click', function(event) {
+ //  		setTimeout(()=> {
+ //  			var x = {"fontSize": 5};
+ //  			setFontSizeCallback(x);
+
+ //  			// var y = {"specificview" : "weixin://openSpecificView/myprofile", "webview_scene" : 3, "url" : "https://www.google.com", "extinfo" : "extinfo"};
+ //  			// openSpecificView(y);
+
+ //  			// var z = {"enable" : true};
+ //  			// enableFullScreen(z);
+
+ //  			var geo = {"type" : "gcj02"};
+ //  			geoLocation(geo);
+
+ //  			// var data = { "content": document.documentURI || _session_data.init_url, "title": "baboya" };
+ //  			// sendEmail(data);
+
+	// 		// var y = {"scene":"1", "sessionId":"1"};
+	// 		// openCamera(y);
+
+	// 		// permission denied
+	// 		//var y = {"packageName":"login_user_name", "data":"+4012345678"};
+	// 		//writeCommData(y);
+ //  		},
+ //  		3000);
+ //  	});
   </script>
 </body>
 </html>
